@@ -117,10 +117,10 @@ Singleton {
                     property string expressive: "Space Grotesk"
                 }
                 property JsonObject transparency: JsonObject {
-                    property bool enable: false
+                    property bool enable: true
                     property bool automatic: true
-                    property real backgroundTransparency: 0.11
-                    property real contentTransparency: 0.57
+                    property real backgroundTransparency: 0.21
+                    property real contentTransparency: 0.77
                 }
                 property JsonObject wallpaperTheming: JsonObject {
                     property bool enableAppsAndShell: true
@@ -166,7 +166,7 @@ Singleton {
                     property JsonObject clock: JsonObject {
                         property bool enable: true
                         property bool showOnlyWhenLocked: false
-                        property string placementStrategy: "leastBusy" // "free", "leastBusy", "mostBusy"
+                        property string placementStrategy: "free" // "free", "leastBusy", "mostBusy"
                         property real x: 100
                         property real y: 100
                         property string style: "cookie"        // Options: "cookie", "digital"
@@ -215,9 +215,9 @@ Singleton {
                 property bool hideWhenFullscreen: true
                 property JsonObject parallax: JsonObject {
                     property bool vertical: false
-                    property bool autoVertical: false
+                    property bool autoVertical: true
                     property bool enableWorkspace: true
-                    property real workspaceZoom: 1.07 // Relative to your screen, not wallpaper size
+                    property real workspaceZoom: 1.15 // Relative to your screen, not wallpaper size
                     property bool enableSidebar: true
                     property real widgetsFactor: 1.2
                 }
@@ -242,8 +242,8 @@ Singleton {
                 property bool verbose: true
                 property bool vertical: false
                 property JsonObject resources: JsonObject {
-                    property bool alwaysShowSwap: true
-                    property bool alwaysShowCpu: true
+                    property bool alwaysShowSwap: false
+                    property bool alwaysShowCpu: false
                     property int memoryWarningThreshold: 95
                     property int swapWarningThreshold: 85
                     property int cpuWarningThreshold: 90
@@ -253,26 +253,26 @@ Singleton {
                     property bool showScreenSnip: true
                     property bool showColorPicker: false
                     property bool showMicToggle: false
-                    property bool showKeyboardToggle: true
+                    property bool showKeyboardToggle: false
                     property bool showDarkModeToggle: true
-                    property bool showPerformanceProfileToggle: false
+                    property bool showPerformanceProfileToggle: true
                     property bool showScreenRecord: false
                 }
                 property JsonObject workspaces: JsonObject {
-                    property bool monochromeIcons: true
-                    property int shown: 10
-                    property bool showAppIcons: true
+                    property bool monochromeIcons: false
+                    property int shown: 6
+                    property bool showAppIcons: false
                     property bool alwaysShowNumbers: false
                     property int showNumberDelay: 300 // milliseconds
-                    property list<string> numberMap: ["1", "2"] // Characters to show instead of numbers on workspace indicator
-                    property bool useNerdFont: false
+                    property list<string> numberMap: ["一","二","三","四","五","六","七","八","九","十","十一","十二","十三","十四","十五","十六","十七","十八","十九","二十"] // Characters to show instead of numbers on workspace indicator
+                    property bool useNerdFont: true
                 }
                 property JsonObject weather: JsonObject {
-                    property bool enable: false
-                    property bool enableGPS: true // gps based location
-                    property string city: "" // When 'enableGPS' is false
-                    property bool useUSCS: false // Instead of metric (SI) units
-                    property int fetchInterval: 10 // minutes
+                    property bool enable: true
+                    property bool enableGPS: false // gps based location
+                    property string city: "Arlington VA" // When 'enableGPS' is false
+                    property bool useUSCS: true // Instead of metric (SI) units
+                    property int fetchInterval: 30 // minutes
                 }
                 property JsonObject indicators: JsonObject {
                     property JsonObject notifications: JsonObject {
@@ -286,14 +286,14 @@ Singleton {
 
             property JsonObject battery: JsonObject {
                 property int low: 20
-                property int critical: 5
-                property int full: 101
+                property int critical: 10
+                property int full: 100
                 property bool automaticSuspend: true
                 property int suspend: 3
             }
 
             property JsonObject calendar: JsonObject {
-                property string locale: "en-GB"
+                property string locale: "en-US"
             }
 
             property JsonObject cheatsheet: JsonObject {
@@ -336,10 +336,10 @@ Singleton {
 
             property JsonObject interactions: JsonObject {
                 property JsonObject scrolling: JsonObject {
-                    property bool fasterTouchpadScroll: false // Enable faster scrolling with touchpad
-                    property int mouseScrollDeltaThreshold: 120 // delta >= this then it gets detected as mouse scroll rather than touchpad
-                    property int mouseScrollFactor: 120
-                    property int touchpadScrollFactor: 450
+                    property bool fasterTouchpadScroll: true // Enable faster scrolling with touchpad
+                    property int mouseScrollDeltaThreshold: 100 // delta >= this then it gets detected as mouse scroll rather than touchpad
+                    property int mouseScrollFactor: 180
+                    property int touchpadScrollFactor: 250
                 }
                 property JsonObject deadPixelWorkaround: JsonObject { // Hyprland leaves out 1 pixel on the right for interactions
                     property bool enable: false
@@ -350,7 +350,7 @@ Singleton {
                 property string ui: "auto" // UI language. "auto" for system locale, or specific language code like "zh_CN", "en_US"
                 property JsonObject translator: JsonObject {
                     property string engine: "auto" // Run `trans -list-engines` for available engines. auto should use google
-                    property string targetLanguage: "auto" // Run `trans -list-all` for available languages
+                    property string targetLanguage: "ar" // Run `trans -list-all` for available languages
                     property string sourceLanguage: "auto"
                 }
             }
@@ -383,7 +383,7 @@ Singleton {
                 property bool showLockedText: true
                 property JsonObject security: JsonObject {
                     property bool unlockKeyring: true
-                    property bool requirePasswordToPower: false
+                    property bool requirePasswordToPower: true
                 }
                 property bool materialShapeChars: true
             }
@@ -552,17 +552,17 @@ Singleton {
             }
 
             property JsonObject sounds: JsonObject {
-                property bool battery: false
-                property bool pomodoro: false
+                property bool battery: true
+                property bool pomodoro: true
                 property string theme: "freedesktop"
             }
 
             property JsonObject time: JsonObject {
                 // https://doc.qt.io/qt-6/qtime.html#toString
-                property string format: "hh:mm"
-                property string shortDateFormat: "dd/MM"
+                property string format: "hh:mm AP"
+                property string shortDateFormat: "MM/dd"
                 property string dateWithYearFormat: "dd/MM/yyyy"
-                property string dateFormat: "ddd, dd/MM"
+                property string dateFormat: "ddd, MM/dd"
                 property JsonObject pomodoro: JsonObject {
                     property int breakTime: 300
                     property int cyclesBeforeLongBreak: 4

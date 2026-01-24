@@ -107,16 +107,25 @@ Item { // Bar content region
             horizontalCenter: parent.horizontalCenter
         }
         spacing: 4
+        // Weather
+        Loader {
+            Layout.leftMargin: 4
+            active: Config.options.bar.weather.enable
+
+            sourceComponent: BarGroup {
+                WeatherBar {}
+            }
+        }
 
         BarGroup {
             id: leftCenterGroup
             anchors.verticalCenter: parent.verticalCenter
             implicitWidth: root.centerSideModuleWidth
 
-            Resources {
-                alwaysShowAllResources: root.useShortenedForm === 2
-                Layout.fillWidth: root.useShortenedForm === 2
-            }
+            // Resources {
+            //     alwaysShowAllResources: root.useShortenedForm === 2
+            //     Layout.fillWidth: root.useShortenedForm === 2
+            // }
 
             Media {
                 visible: root.useShortenedForm < 2
@@ -329,15 +338,6 @@ Item { // Bar content region
                 Layout.fillHeight: true
             }
 
-            // Weather
-            Loader {
-                Layout.leftMargin: 4
-                active: Config.options.bar.weather.enable
-
-                sourceComponent: BarGroup {
-                    WeatherBar {}
-                }
-            }
         }
     }
 }
