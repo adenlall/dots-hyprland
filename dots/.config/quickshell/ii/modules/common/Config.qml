@@ -274,6 +274,14 @@ Singleton {
                     property bool useUSCS: true // Instead of metric (SI) units
                     property int fetchInterval: 30 // minutes
                 }
+                property JsonObject prayer: JsonObject {
+                    property bool enable: true
+                    property real latitude: 36.5597 // lat/long required for Prayer Service to work
+                    property real longitude: 136.6520 // Kanazawa cords
+                    property int timezone: -6 // The difference to Greenwich time (GMT) in hours.
+                    property bool timezone_auto: false // If omitted or set to auto, timezone is extracted from the system
+                    property int fetchInterval: 30 // minutes
+                }
                 property JsonObject indicators: JsonObject {
                     property JsonObject notifications: JsonObject {
                         property bool showUnreadCount: false

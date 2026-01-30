@@ -1,4 +1,5 @@
 import qs.modules.ii.bar.weather
+import qs.modules.ii.bar.prayer
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
@@ -107,15 +108,6 @@ Item { // Bar content region
             horizontalCenter: parent.horizontalCenter
         }
         spacing: 4
-        // Weather
-        Loader {
-            Layout.leftMargin: 4
-            active: Config.options.bar.weather.enable
-
-            sourceComponent: BarGroup {
-                WeatherBar {}
-            }
-        }
 
         BarGroup {
             id: leftCenterGroup
@@ -127,10 +119,26 @@ Item { // Bar content region
             //     Layout.fillWidth: root.useShortenedForm === 2
             // }
 
+            Loader {
+                active: (Config.options.bar.prayer.enable && Config.options.bar.prayer.longitude && Config.options.bar.prayer.latitude)
+
+                sourceComponent: BarGroup {
+                    PrayerBar {}
+                }
+            }
+            Loader {
+                active: Config.options.bar.weather.enable
+
+                sourceComponent: BarGroup {
+                    WeatherBar {}
+                }
+            }
+
             Media {
                 visible: root.useShortenedForm < 2
                 Layout.fillWidth: true
             }
+
         }
 
         VerticalBarSeparator {
