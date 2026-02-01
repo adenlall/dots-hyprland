@@ -3,21 +3,48 @@ pragma ComponentBehavior: Bound
 
 import Quickshell
 import Quickshell.Io
+import QtQuick
 import QtPositioning
 import qs.modules.common
 
-import QtQuick 6.0
 import "Praytime.js" as PrayTimeModule
 
 
 Singleton {
     id: root
-    readonly property int fetchInterval: Config.options.bar.prayer.fetchInterval * 60 * 30 // 3 minute
+    readonly property int fetchInterval: Config.options.bar.prayer.fetchInterval * 60000 // x*minute
     readonly property real latitude: Config.options.bar.prayer.latitude
     readonly property real longitude: Config.options.bar.prayer.longitude
     readonly property real timezone: Config.options.bar.prayer.timezone
+    readonly property real timezone_auto: Config.options.bar.prayer.timezone_auto
     property var prayTime: new PrayTimeModule.PrayTime("ISNA")
     
+    readonly property bool imsak    : Config.options.bar.prayer.prayerControl.imsak
+    readonly property bool fajr     : Config.options.bar.prayer.prayerControl.fajr
+    readonly property bool sunrise  : Config.options.bar.prayer.prayerControl.sunrise
+    readonly property bool dhuhr    : Config.options.bar.prayer.prayerControl.dhuhr
+    readonly property bool asr      : Config.options.bar.prayer.prayerControl.asr
+    readonly property bool sunset   : Config.options.bar.prayer.prayerControl.sunset
+    readonly property bool maghrib  : Config.options.bar.prayer.prayerControl.maghrib
+    readonly property bool isha     : Config.options.bar.prayer.prayerControl.isha
+    readonly property bool midnight : Config.options.bar.prayer.prayerControl.midnight
+
+    readonly property string configHash: JSON.stringify({
+        imsak:root.imsak,
+        fajr:root.fajr,
+        sunrise:root.sunrise,
+        dhuhr:root.dhuhr,
+        asr:root.asr,
+        sunset:root.sunset,
+        maghrib:root.maghrib,
+        isha:root.isha,
+        midnight:root.midnight
+    })
+
+    onConfigHashChanged: {
+        root.getData()
+    }
+
     onLatitudeChanged: {
         root.getData();
     }
@@ -27,8 +54,11 @@ Singleton {
     onLongitudeChanged: {
         root.getData();
     }
+    onTimezone_autoChanged: {
+        root.getData();
+    }
 
-    property var symbols: ({
+    property var symbols: ({ // prayer icons
 		imsak    : 'ev_shadow',
 		fajr     : 'moon_stars',
 		sunrise  : 'wb_twilight',
@@ -41,28 +71,33 @@ Singleton {
 	})
 
     property var data : ({
+        lastRefresh:'',
         next:{
-            prayer:'',
-            remaining:'',
-            time:'',
-            symbol:''
+            prayer:'',      // prayer name
+            remaining:'',   // remaining time for the prayer
+            time:'',        // time witch the prayer srart
+            symbol:''       // the icon that represent the prayer
         },
-        table:[]
+        table:[]            // all prayer of the day ex: [{pray:"Asr", time:"23:00", symbol:"sun"},...]
     })
 
     function getData() {
-        var dd = new Date();
-        var time = dd.getHours()+""+dd.getMinutes();
-        var rawtimes = prayTime.getTimes(dd, [root.latitude, root.longitude], root.timezone);
-        var times = getPrayersPreParsed(rawtimes);
-        var nnext = getNext(time, times);
-        root.data.next = {
-            prayer: nnext[0],
-            remaining: getRemaining(nnext[1]),
-            time: nnext[1],
-            symbol: symbols[nnext[0]]
+        console.log('tessssssssssssss')
+        const newDate = new Date();
+        const time = newDate.getHours()+""+newDate.getMinutes();
+        var rawPrayerTimes = prayTime.getTimes(newDate, [root.latitude, root.longitude], root.timezone_auto ? 'auto' : root.timezone);
+        var prayerTimes = getPrayersPreParsed(rawPrayerTimes);
+        var nnext = getNext(time, prayerTimes);
+        root.data = {
+            lastRefresh:DateTime.time + " • " + DateTime.date,
+            next:{
+                prayer: nnext[0],
+                remaining: getRemaining(nnext[1]),
+                time: nnext[1],
+                symbol: symbols[nnext[0]]
+            },
+            table:getPrayersParsed(prayerTimes)
         }
-        root.data.table = getPrayersParsed(times);
     }
 
     function getNext(time, obj){
@@ -96,7 +131,7 @@ Singleton {
 
     function getPrayersPreParsed(rawTimes){
         const filtred = Object.keys(rawTimes).reduce((acc, key) => {
-            if (rawTimes[key] !== "-----") {
+            if (Config.options.bar.prayer.prayerControl[key]) {
                 acc[key] = rawTimes[key];
             }
             return acc;
@@ -113,17 +148,11 @@ Singleton {
         return arr
     }
 
-    Component.onCompleted: {
-        if (!root.gpsActive) return;
-        console.info("[PrayerService] Starting the GPS service.");
-        positionSource.start();
-    }
-
     Timer {
-        running: !root.gpsActive
+        running: true
         repeat: true
         interval: root.fetchInterval
-        triggeredOnStart: !root.gpsActive
+        triggeredOnStart: true
         onTriggered: root.getData()
     }
 

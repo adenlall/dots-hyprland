@@ -16,42 +16,6 @@ StyledPopup {
         implicitHeight: gridLayout.implicitHeight
         spacing: 5
 
-        // Header
-        ColumnLayout {
-            id: header
-            Layout.alignment: Qt.AlignHCenter
-            spacing: 2
-
-            RowLayout {
-                Layout.alignment: Qt.AlignHCenter
-                spacing: 6
-
-                MaterialSymbol {
-                    fill: 0
-                    font.weight: Font.Medium
-                    text: "location_on"
-                    iconSize: Appearance.font.pixelSize.large
-                    color: Appearance.colors.colOnSurfaceVariant
-                }
-
-                StyledText {
-                    text: Prayer.data.next
-                    font {
-                        weight: Font.Medium
-                        pixelSize: Appearance.font.pixelSize.normal
-                    }
-                    color: Appearance.colors.colOnSurfaceVariant
-                }
-            }
-            StyledText {
-                id: temp
-                font.pixelSize: Appearance.font.pixelSize.smaller
-                color: Appearance.colors.colOnSurfaceVariant
-                text: Prayer.data.temp + " • " + Translation.tr("Feels like %1").arg(Prayer.data.tempFeelsLike)
-            }
-        }
-
-        // Metrics grid
         GridLayout {
             id: gridLayout
             columns: 1
@@ -64,6 +28,9 @@ StyledPopup {
                     title:  modelData.pray
                     symbol: modelData.symbol
                     value:  modelData.time
+                    textColor: Appearance.m3colors.m3tertiary
+                    fontWeight: modelData.pray===Prayer.data.next.prayer ? 900 : 400
+                    bgColor: modelData.pray===Prayer.data.next.prayer ? Appearance.m3colors.m3onTertiary : Appearance.colors.colSurfaceContainerHigh
                 }
             }
         }

@@ -280,7 +280,18 @@ Singleton {
                     property real longitude: 136.6520 // Kanazawa cords
                     property int timezone: -6 // The difference to Greenwich time (GMT) in hours.
                     property bool timezone_auto: false // If omitted or set to auto, timezone is extracted from the system
-                    property int fetchInterval: 30 // minutes
+                    property int fetchInterval: 2 // minutes
+                    property JsonObject prayerControl: JsonObject {
+                        property bool imsak    : false
+                        property bool fajr     : true
+                        property bool sunrise  : false
+                        property bool dhuhr    : true
+                        property bool asr      : true
+                        property bool sunset   : false
+                        property bool maghrib  : true
+                        property bool isha     : true
+                        property bool midnight : false
+                    }
                 }
                 property JsonObject indicators: JsonObject {
                     property JsonObject notifications: JsonObject {

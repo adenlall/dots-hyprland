@@ -249,4 +249,162 @@ ContentPage {
             }
         }
     }
+
+    ContentSection {
+        icon: "prayer_times"
+        title: Translation.tr("Prayer")
+
+        ContentSubsection {
+            title: Translation.tr("Coordinates")
+            ConfigRow {
+                uniform: true
+                MaterialTextArea {
+                    Layout.fillWidth: true
+                    placeholderText: Translation.tr("Latitude")
+                    text: Config.options.bar.prayer.latitude
+                    wrapMode: TextEdit.Wrap
+                    onTextChanged: {
+                        Config.options.bar.prayer.latitude = text;
+                    }
+                }
+                MaterialTextArea {
+                    Layout.fillWidth: true
+                    placeholderText: Translation.tr("Longitude")
+                    text: Config.options.bar.prayer.longitude
+                    wrapMode: TextEdit.Wrap
+                    onTextChanged: {
+                        Config.options.bar.prayer.longitude = text;
+                    }
+                }
+            }
+        }
+        ConfigRow {
+            ConfigSwitch {
+                buttonIcon: "nest_clock_farsight_analog"
+                text: Translation.tr("Auto time zone")
+                checked: Config.options.bar.prayer.timezone_auto
+                onCheckedChanged: {
+                    Config.options.bar.prayer.timezone_auto = checked;
+                }
+            }
+        }
+        ConfigSpinBox {
+            icon: "av_timer"
+            text: Translation.tr("Timezone relative to UTC")
+            value: Config.options.bar.prayer.timezone
+            from: -12
+            to: 12
+            stepSize: 1
+            onValueChanged: {
+                Config.options.bar.prayer.timezone = value;
+            }
+        }
+        ConfigSpinBox {
+            icon: "av_timer"
+            text: Translation.tr("Polling interval (m)")
+            value: Config.options.bar.prayer.fetchInterval
+            from: 1
+            to: 60
+            stepSize: 5
+            onValueChanged: {
+                Config.options.bar.prayer.fetchInterval = value;
+            }
+        }
+
+        ContentSubsection {
+            title: Translation.tr("Prayers Option")
+            Layout.fillWidth: true
+
+            ConfigRow {
+                uniform: true
+                ConfigSwitch {
+                    buttonIcon: Prayer.symbols["imsak"]
+                    text: Translation.tr("imsak")
+                    checked: Config.options.bar.prayer.prayerControl.imsak
+                    onCheckedChanged: {
+                        Config.options.bar.prayer.prayerControl.imsak = checked;
+                        Prayer.getData();
+                    }
+                }
+                ConfigSwitch {
+                    buttonIcon: Prayer.symbols["fajr"]
+                    text: Translation.tr("Fajr")
+                    checked: Config.options.bar.prayer.prayerControl.fajr
+                    onCheckedChanged: {
+                        Config.options.bar.prayer.prayerControl.fajr = checked;
+                        Prayer.getData();
+                    }
+                }
+                ConfigSwitch {
+                    buttonIcon: Prayer.symbols["sunrise"]
+                    text: Translation.tr("Sunrise")
+                    checked: Config.options.bar.prayer.prayerControl.sunrise
+                    onCheckedChanged: {
+                        Config.options.bar.prayer.prayerControl.sunrise = checked;
+                        Prayer.getData();
+                    }
+                }
+            }
+            ConfigRow {
+                uniform: true
+                ConfigSwitch {
+                    buttonIcon: Prayer.symbols["dhuhr"]
+                    text: Translation.tr("Duhr")
+                    checked: Config.options.bar.prayer.prayerControl.dhuhr
+                    onCheckedChanged: {
+                        Config.options.bar.prayer.prayerControl.dhuhr = checked;
+                        Prayer.getData();
+                    }
+                }
+                ConfigSwitch {
+                    buttonIcon: Prayer.symbols["asr"]
+                    text: Translation.tr("Asr")
+                    checked: Config.options.bar.prayer.prayerControl.asr
+                    onCheckedChanged: {
+                        Config.options.bar.prayer.prayerControl.asr = checked;
+                        Prayer.getData();
+                    }
+                }
+                ConfigSwitch {
+                    buttonIcon: Prayer.symbols["sunset"]
+                    text: Translation.tr("Sunset")
+                    checked: Config.options.bar.prayer.prayerControl.sunset
+                    onCheckedChanged: {
+                        Config.options.bar.prayer.prayerControl.sunset = checked;
+                        Prayer.getData();
+                    }
+                }
+            }
+            ConfigRow {
+                uniform: true
+                ConfigSwitch {
+                    buttonIcon: Prayer.symbols["maghrib"]
+                    text: Translation.tr("Maghrib")
+                    checked: Config.options.bar.prayer.prayerControl.maghrib
+                    onCheckedChanged: {
+                        Config.options.bar.prayer.prayerControl.maghrib = checked;
+                        Prayer.getData();
+                    }
+                }
+                ConfigSwitch {
+                    buttonIcon: Prayer.symbols["isha"]
+                    text: Translation.tr("Isha")
+                    checked: Config.options.bar.prayer.prayerControl.isha
+                    onCheckedChanged: {
+                        Config.options.bar.prayer.prayerControl.isha = checked;
+                        Prayer.getData();
+                    }
+                }
+                ConfigSwitch {
+                    buttonIcon: Prayer.symbols["midnight"]
+                    text: Translation.tr("Midnight")
+                    checked: Config.options.bar.prayer.prayerControl.midnight
+                    onCheckedChanged: {
+                        Config.options.bar.prayer.prayerControl.midnight = checked;
+                        Prayer.getData();
+                    }
+                }
+            }
+        }
+    }
 }

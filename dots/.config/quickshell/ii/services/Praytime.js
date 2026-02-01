@@ -67,12 +67,12 @@ var PrayTime = function(method) {
 
 	// Time Names
 	timeNames = {
-		// imsak    : 'Imsak',
+		imsak    : 'Imsak',
 		fajr     : 'Fajr',
-		// sunrise  : 'Sunrise',
+		sunrise  : 'Sunrise',
 		dhuhr    : 'Dhuhr',
 		asr      : 'Asr',
-		// sunset   : 'Sunset',
+		sunset   : 'Sunset',
 		maghrib  : 'Maghrib',
 		isha     : 'Isha',
 		midnight : 'Midnight'

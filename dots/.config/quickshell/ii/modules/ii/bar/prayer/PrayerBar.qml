@@ -28,24 +28,11 @@ MouseArea {
         }
     }
 
-    // ── Add background here ───────────────────────────────────────────────
     Rectangle {
         id: bg
         anchors.fill: parent
-
-        // Pick one of these styles (most common in Quickshell bars):
-        color: Appearance.m3colors.m3tertiary      // ← usually semi-transparent layer / card bg
-        // color: Qt.rgba(0.12, 0.12, 0.15, 0.75) // dark semi-transparent (very popular)
-        // color: "#2e3440"                       // solid nordic dark
-        // color: Qt.rgba(Appearance.colors.colOnLayer1.r, 
-        //                Appearance.colors.colOnLayer1.g, 
-        //                Appearance.colors.colOnLayer1.b, 0.08) // faint accent tint
-
-        // Optional: nice rounded look (works great on bars)
-        radius: 10   // or Appearance.radius.medium / small / etc. if defined
-
-        // Optional: subtle border
-        // border { color: Appearance.colors.colBorder; width: 1 }
+        color: Appearance.m3colors.m3tertiary
+        radius: 10
     }
 
     RowLayout {
