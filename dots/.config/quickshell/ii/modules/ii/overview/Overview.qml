@@ -10,6 +10,7 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
 import Quickshell.Hyprland
+import Quickshell.Widgets
 
 Scope {
     id: overviewScope
@@ -106,7 +107,10 @@ Scope {
                     visible: (panelWindow.searchingText == "")
                 }
             }
-        }
+            
+            // AnimeWidget{
+
+            // }
     }
 
     function toggleClipboard() {
@@ -217,4 +221,5 @@ Scope {
             overviewScope.toggleEmojis();
         }
     }
+}
 }
