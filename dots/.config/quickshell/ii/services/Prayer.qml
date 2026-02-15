@@ -110,8 +110,8 @@ Singleton {
                 if (Math.abs(time-arr[i].replace(":","")) <= 2){
                     Audio.playSystemSound("alarm-clock-elapsed")
                     Quickshell.execDetached(["notify-send", 
-                        Translation.tr("Prayer : "+arr[i][0]),
-                        Translation.tr("The Prayer is now at : "+arr[i][1])
+                        Translation.tr("Prayer : "+Object.keys(obj)[i]),
+                        Translation.tr("The Prayer is now at : "+next)
                         , "-a", "Shell"
                     ]);
                 }
