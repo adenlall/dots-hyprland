@@ -1,25 +1,31 @@
+pragma ComponentBehavior: Bound
+
 import qs.modules.common
+import qs.modules.ii.overview.Anime
 import qs.modules.common.widgets
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Layouts
-import Quickshell
-import Quickshell.Io
-import Quickshell.Wayland
-import Quickshell.Hyprland
 import Quickshell.Widgets
-import qs.services.Anilist
+import qs.services
+import QtPositioning
+
 
 Rectangle {
+    id: root
+    property var watchingList: []
+    property bool loading: true
+
     color: Appearance.m3colors.m3secondary
     height: 300
     radius: 30
     width: parent.width
     RowLayout {
+        // visible: false
         anchors {
-            left: parent.left
             top: parent.top
+            right: parent.right
             bottom: parent.bottom
+            left: parent.left
             margins: 15
         }
         width: parent.width
@@ -28,107 +34,76 @@ Rectangle {
             height: parent.height
             width: 190
             color: "transparent"
-
-            ClippingRectangle {
-                width: 180
-                height: parent.height
-                radius: 25
-                Image {
-                    anchors.fill: parent
-                    source: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx167152-u0cBZkqDowHP.jpg"
-                    fillMode: Image.PreserveAspectCrop
-                }
+            AnimePoster{
+                src: watchingList[3]?.media?.coverImage?.large??""
+                h: parent.height
             }
         }
         Rectangle {
-            Layout.fillWidth: true
+            Layout.preferredWidth: parent.width * 0.3
+            Layout.fillWidth: false
             Layout.fillHeight: true
             color: "transparent"
+            // color: "red"
             Column {
+                id: container
                 width: parent.width
                 height: parent.height
                 spacing: 10
                 StyledText {
+                    width: parent.width
                     color: Appearance.m3colors.m3onSecondary
-                    text: "Sentenced to be Hero"
+                    text: watchingList[3]?.media?.title?.userPreferred??""
                     font.weight: 900
                     font.pixelSize: Appearance.font.pixelSize.title
+                    elide: Text.ElideRight
+                    wrapMode: Text.NoWrap
                 }
                 StyledText {
                     color: Appearance.m3colors.m3onSecondary
-                    text: "EP 6 : in 5 day 20 hours"
+                    text: watchingList[3]?.media?.nextAiringEpisode?.episode ? ("EP "+watchingList[3]?.media?.nextAiringEpisode?.episode+" : "+Anivice.getRemainingTime(watchingList[3]?.media?.nextAiringEpisode?.airingAt).formatted):""
                     font.weight: 400
                     font.pixelSize: Appearance.font.pixelSize.larger
                 }
-                Row{
+                Row {
+                    id: genreRow
                     spacing: 5
-                    Rectangle {
-                        width: childrenRect.width + 20
-                        height: childrenRect.height + 5
-                        color: Appearance.m3colors.m3onPrimary
-                        radius: 12
-                        border.color: Appearance.m3colors.m3onPrimaryFixedVariant
-                        border.width: 1
-                        StyledText {
-                            anchors.centerIn: parent
-                            color: Appearance.m3colors.m3primary
-                            text: "Drama"
-                            font.pixelSize: Appearance.font.pixelSize.small
-                        }
-                    }
-                    Rectangle {
-                        width: childrenRect.width + 20
-                        height: childrenRect.height + 5
-                        color: Appearance.m3colors.m3onPrimary
-                        radius: 12
-                        border.color: Appearance.m3colors.m3onPrimaryFixedVariant
-                        border.width: 1
-                        StyledText {
-                            anchors.centerIn: parent
-                            color: Appearance.m3colors.m3primary
-                            text: "Action"
-                            font.pixelSize: Appearance.font.pixelSize.small
-                        }
-                    }
-                    Rectangle {
-                        width: childrenRect.width + 20
-                        height: childrenRect.height + 5
-                        color: Appearance.m3colors.m3onPrimary
-                        radius: 12
-                        border.color: Appearance.m3colors.m3onPrimaryFixedVariant
-                        border.width: 1
-                        StyledText {
-                            anchors.centerIn: parent
-                            color: Appearance.m3colors.m3primary
-                            text: "Trailer"
-                            font.pixelSize: Appearance.font.pixelSize.small
-                        }
-                    }
-                }
-                Rectangle {
-                    width: childrenRect.width + 20
-                    height: childrenRect.height + 10
-                    color: Appearance.m3colors.m3tertiary
-                    radius: 9
-                    StyledText{
-                        anchors.centerIn: parent
-                        color: Appearance.m3colors.m3onTertiary
-                        text: "Login with Anilist"
-                        font.pixelSize: Appearance.font.pixelSize.large
-                    }
-                    MouseArea {
-                        anchors.fill: parent
-                        cursorShape: Qt.PointingHandCursor
-                        onClicked: {
-                            if (AuthManager.authenticated) {
-                                AuthManager.logout()
-                            } else {
-                                AuthManager.authenticate()
+                    Repeater {
+                        model: watchingList[3]?.media?.genres?.slice(0, 3);
+
+                        delegate: Rectangle {
+                            required property string modelData
+                            height: 32
+                            radius: 12
+                            color: Appearance.m3colors.m3onPrimary
+                            border.color: Appearance.m3colors.m3onPrimaryFixedVariant
+                            border.width: 1
+
+                            implicitWidth: textItem.implicitWidth + 20
+
+                            Text {
+                                id: textItem
+                                anchors.centerIn: parent
+                                text: modelData
+                                color: Appearance.m3colors.m3primary
+                                font.pixelSize: Appearance.font.pixelSize.small
                             }
                         }
                     }
                 }
             }
         }
+        AnimeWatching{
+            animes: watchingList
+        }
     }
+    Component.onCompleted: {
+        Anivice.getUserWatching()
+        .then(function(response) {
+            response = response.MediaListCollection.lists.filter(item => item.name === "Watching")[0].entries
+            root.watchingList = response
+        })
+    }
+
+
 }

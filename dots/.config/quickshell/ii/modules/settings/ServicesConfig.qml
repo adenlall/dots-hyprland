@@ -4,6 +4,7 @@ import qs.services
 import qs.modules.common
 import qs.modules.common.widgets
 
+
 ContentPage {
     forceWidth: true
 
@@ -41,7 +42,7 @@ ContentPage {
         }
         ConfigSpinBox {
             icon: "av_timer"
-            text: Translation.tr("Polling interval (s)")
+            text: Translation.tr("Polling interval (m)")
             value: Config.options.musicRecognition.interval
             from: 2
             to: 10
@@ -406,5 +407,81 @@ ContentPage {
                 }
             }
         }
+    }
+
+    ContentSection {
+        icon: "ramen_dining"
+        title: Translation.tr("Anime")
+
+        ConfigRow {
+            ConfigSwitch {
+                buttonIcon: "settings_power"
+                text: Translation.tr("Enable")
+                checked: Config.options.bar.anime.enable
+                onCheckedChanged: {
+                    Config.options.bar.anime.enable = checked;
+                }
+            }
+            RippleButtonWithIcon {
+                buttonRadius: Appearance.rounding.small
+                materialIcon: "ifl"
+                mainText: "Get your AniList Token"
+                onClicked: {
+                    Anivice.openAuth()
+                }
+            }
+        }
+
+
+        ContentSubsection {
+            title: Translation.tr("Authorize AniList")
+            tooltip: Translation.tr("You'll need to Copy-Past your AniList API Token key here.\nthen fetch it with the 'Fetch' button")
+            ConfigRow {
+                MaterialTextArea {
+                    id: anilistToken
+                    Layout.fillWidth: true
+                    wrapMode: TextEdit.NoWrap
+                    placeholderText: Translation.tr("AniList API Token")
+                    text: Config.options.bar.anime.api_token
+                    onTextChanged: {
+                        Config.options.bar.anime.api_token = text
+                    }
+                }
+                RippleButtonWithIcon {
+                    Layout.fillHeight: true
+                    mainText: Translation.tr("Fetch with Token")
+                    onClicked: {
+                        Anivice.saveToken()
+                    }
+                }
+            }
+        }
+
+        ConfigSpinBox {
+            icon: "av_timer"
+            text: Translation.tr("Overview Widget Polling interval (m)")
+            value: Config.options.bar.anime.fetchInterval
+            from: 1
+            to: 999
+            stepSize: 1
+            onValueChanged: {
+                Config.options.bar.anime.fetchInterval = value;
+            }
+        }
+
+        ConfigRow {
+            ConfigSwitch {
+                buttonIcon: "destruction"
+                text: Translation.tr("Destroy Widget")
+                checked: !Config.options.bar.anime.dontDestroy
+                onCheckedChanged: {
+                    Config.options.bar.anime.dontDestroy = !checked;
+                }
+                StyledToolTip {
+                    text: Translation.tr("Destroy Widget When Overview is out-of-focus\nTurn off if you have a large AniList lists or you have less computer ressources")
+                }
+            }
+        }
+
     }
 }

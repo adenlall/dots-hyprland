@@ -107,7 +107,24 @@ Scope {
                 }
             }
 
-            AnimeWidget{}
+            Item {
+                width: parent.width
+                height: 300
+                Component {
+                    id: animeWidgetComponent
+                    AnimeWidget {
+                        visible: (panelWindow.searchingText == "")
+                    }
+                }
+                Loader {
+                    width: parent.width
+                    height: 300
+                    active: (Config.options.bar.anime.dontDestroy || (GlobalStates.overviewOpen && (Config?.options.overview.enable ?? true))) && (Config.options.bar.anime.enable && Config.options.bar.anime.api_token && Config.options.bar.anime.id && Config.options.bar.anime.auth)
+                    sourceComponent: animeWidgetComponent
+                }
+            }
+
+
         }
     }
 

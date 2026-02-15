@@ -293,6 +293,16 @@ Singleton {
                         property bool midnight : false
                     }
                 }
+                property JsonObject anime: JsonObject {
+                    property bool enable: true
+                    property string api_token: ''
+                    property bool auth: false
+                    property bool dontDestroy: false
+                    property string id: ''
+                    property string name: ''
+                    property int fetchInterval: 5 // minutes
+                    
+                }
                 property JsonObject indicators: JsonObject {
                     property JsonObject notifications: JsonObject {
                         property bool showUnreadCount: false

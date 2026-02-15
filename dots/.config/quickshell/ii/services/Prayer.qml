@@ -82,7 +82,6 @@ Singleton {
     })
 
     function getData() {
-        console.log('tessssssssssssss')
         const newDate = new Date();
         const time = newDate.getHours()+""+newDate.getMinutes();
         var rawPrayerTimes = prayTime.getTimes(newDate, [root.latitude, root.longitude], root.timezone_auto ? 'auto' : root.timezone);
