@@ -250,13 +250,13 @@ Singleton {
                 }
                 property list<string> screenList: [] // List of names, like "eDP-1", find out with 'hyprctl monitors' command
                 property JsonObject utilButtons: JsonObject {
-                    property bool showScreenSnip: true
+                    property bool showScreenSnip: false
                     property bool showColorPicker: false
                     property bool showMicToggle: false
                     property bool showKeyboardToggle: false
                     property bool showDarkModeToggle: true
                     property bool showPerformanceProfileToggle: true
-                    property bool showScreenRecord: false
+                    property bool showScreenRecord: true
                 }
                 property JsonObject workspaces: JsonObject {
                     property bool monochromeIcons: false
@@ -530,7 +530,7 @@ Singleton {
                     property bool textFadeIn: false
                 }
                 property JsonObject booru: JsonObject {
-                    property bool allowNsfw: false
+                    property bool allowNsfw: true
                     property string defaultProvider: "yandere"
                     property int limit: 20
                     property JsonObject zerochan: JsonObject {
@@ -555,19 +555,17 @@ Singleton {
                         property int columns: 5
                         property list<var> toggles: [
                             { "size": 2, "type": "network" },
-                            { "size": 2, "type": "bluetooth"  },
+                            { "size": 1, "type": "mic"  },
                             { "size": 1, "type": "idleInhibitor" },
-                            { "size": 1, "type": "mic" },
-                            { "size": 2, "type": "audio" },
-                            { "size": 2, "type": "nightLight" }
+                            { "size": 1, "type": "nightLight" },
                         ]
                     }
                 }
 
                 property JsonObject quickSliders: JsonObject {
-                    property bool enable: false
+                    property bool enable: true
                     property bool showMic: false
-                    property bool showVolume: true
+                    property bool showVolume: false
                     property bool showBrightness: true
                 }
             }
