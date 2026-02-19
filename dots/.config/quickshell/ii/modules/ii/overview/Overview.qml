@@ -119,7 +119,7 @@ Scope {
                 Loader {
                     width: parent.width
                     height: 300
-                    active: (Config.options.bar.anime.dontDestroy || (GlobalStates.overviewOpen && (Config?.options.overview.enable ?? true))) && (Config.options.bar.anime.enable && Config.options.bar.anime.api_token && Config.options.bar.anime.id && Config.options.bar.anime.auth)
+                    active: (Config.options.bar.anime.dontDestroy || (GlobalStates.overviewOpen && (Config?.options.overview.enable ?? true))) && (Config.options.bar.anime.enable && Config.options.bar.anime.api_token && Config.options.bar.anime.id)
                     sourceComponent: animeWidgetComponent
                 }
             }

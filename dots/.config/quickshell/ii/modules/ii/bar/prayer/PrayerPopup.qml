@@ -28,6 +28,7 @@ StyledPopup {
                     title:  modelData.pray
                     symbol: modelData.symbol
                     value:  modelData.time
+                    diff: modelData.diff
                     textColor: Appearance.m3colors.m3tertiary
                     fontWeight: modelData.pray===Prayer.data.next.prayer ? 900 : 400
                     bgColor: modelData.pray===Prayer.data.next.prayer ? Appearance.m3colors.m3onTertiary : Appearance.colors.colSurfaceContainerHigh

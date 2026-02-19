@@ -78,7 +78,7 @@ Singleton {
             time:'',        // time witch the prayer srart
             symbol:''       // the icon that represent the prayer
         },
-        table:[]            // all prayer of the day ex: [{pray:"Asr", time:"23:00", symbol:"sun"},...]
+        table:[]            // all prayer ex: [{pray:"Asr", time:"23:00", symbol:"sun", diff:"+5h:2m"},...]
     })
 
     function getData() {
@@ -151,7 +151,12 @@ Singleton {
     }
 
     function getPrayersParsed(prayers){
-        const arr = Object.entries(prayers).map(([pray, time]) => ({ pray, time, symbol:symbols[pray] }))
+        const arr = Object.entries(prayers).map(([pray, time]) => ({
+                pray,
+                time,
+                symbol:symbols[pray],
+                diff: getRemaining(time)
+            }))
         return arr
     }
 
