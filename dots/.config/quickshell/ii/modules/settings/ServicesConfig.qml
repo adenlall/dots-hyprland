@@ -4,6 +4,13 @@ import qs.services
 import qs.modules.common
 import qs.modules.common.widgets
 
+import Qt5Compat.GraphicalEffects
+import Quickshell
+import Quickshell.Io
+import qs.modules.common.functions
+
+
+
 ContentPage {
     forceWidth: true
 
@@ -41,7 +48,7 @@ ContentPage {
         }
         ConfigSpinBox {
             icon: "av_timer"
-            text: Translation.tr("Polling interval (s)")
+            text: Translation.tr("Polling interval (m)")
             value: Config.options.musicRecognition.interval
             from: 2
             to: 10
@@ -203,6 +210,32 @@ ContentPage {
         }
     }
 
+    // There's no update indicator in ii for now so we shouldn't show this yet
+    // ContentSection {
+    //     icon: "deployed_code_update"
+    //     title: Translation.tr("System updates (Arch only)")
+
+    //     ConfigSwitch {
+    //         text: Translation.tr("Enable update checks")
+    //         checked: Config.options.updates.enableCheck
+    //         onCheckedChanged: {
+    //             Config.options.updates.enableCheck = checked;
+    //         }
+    //     }
+
+    //     ConfigSpinBox {
+    //         icon: "av_timer"
+    //         text: Translation.tr("Check interval (mins)")
+    //         value: Config.options.updates.checkInterval
+    //         from: 60
+    //         to: 1440
+    //         stepSize: 60
+    //         onValueChanged: {
+    //             Config.options.updates.checkInterval = value;
+    //         }
+    //     }
+    // }
+
     ContentSection {
         icon: "weather_mix"
         title: Translation.tr("Weather")
@@ -311,6 +344,30 @@ ContentPage {
             }
         }
 
+
+        RippleButtonWithIcon {
+            Layout.fillWidth: true
+            materialIcon: "music_cast"
+            StyledToolTip {
+                text: Translation.tr("Pick your Adhan Sound")
+            }
+            onClicked: {
+                Quickshell.execDetached(`${Directories.selectAdhanScriptPath}`);
+            }
+            mainContentComponent: Component {
+                RowLayout {
+                    spacing: 10
+                    StyledText {
+                        font.pixelSize: Appearance.font.pixelSize.small
+                        text: ((Config.options.bar.prayer.adhan === "" || Config.options.bar.prayer.adhan === null) ? "Choose Adhan Audio File" : Config.options.bar.prayer.adhan)
+                        color: Appearance.colors.colOnSecondaryContainer
+                    }
+                }
+            }
+        }
+
+        
+
         ContentSubsection {
             title: Translation.tr("Prayers Option")
             Layout.fillWidth: true
@@ -406,5 +463,81 @@ ContentPage {
                 }
             }
         }
+    }
+
+    ContentSection {
+        icon: "ramen_dining"
+        title: Translation.tr("Anime")
+
+        ConfigRow {
+            ConfigSwitch {
+                buttonIcon: "settings_power"
+                text: Translation.tr("Enable")
+                checked: Config.options.bar.anime.enable
+                onCheckedChanged: {
+                    Config.options.bar.anime.enable = checked;
+                }
+            }
+            RippleButtonWithIcon {
+                buttonRadius: Appearance.rounding.small
+                materialIcon: "ifl"
+                mainText: "Get your AniList Token"
+                onClicked: {
+                    Anivice.openAuth()
+                }
+            }
+        }
+
+
+        ContentSubsection {
+            title: Translation.tr("Authorize AniList")
+            tooltip: Translation.tr("You'll need to Copy-Past your AniList API Token key here.\nthen fetch it with the 'Fetch' button")
+            ConfigRow {
+                MaterialTextArea {
+                    id: anilistToken
+                    Layout.fillWidth: true
+                    wrapMode: TextEdit.NoWrap
+                    placeholderText: Translation.tr("AniList API Token")
+                    text: Config.options.bar.anime.api_token
+                    onTextChanged: {
+                        Config.options.bar.anime.api_token = text
+                    }
+                }
+                RippleButtonWithIcon {
+                    Layout.fillHeight: true
+                    mainText: Translation.tr("Fetch with Token")
+                    onClicked: {
+                        Anivice.saveToken()
+                    }
+                }
+            }
+        }
+
+        ConfigSpinBox {
+            icon: "av_timer"
+            text: Translation.tr("Overview Widget Polling interval (m)")
+            value: Config.options.bar.anime.fetchInterval
+            from: 1
+            to: 999
+            stepSize: 1
+            onValueChanged: {
+                Config.options.bar.anime.fetchInterval = value;
+            }
+        }
+
+        ConfigRow {
+            ConfigSwitch {
+                buttonIcon: "destruction"
+                text: Translation.tr("Destroy Widget")
+                checked: !Config.options.bar.anime.dontDestroy
+                onCheckedChanged: {
+                    Config.options.bar.anime.dontDestroy = !checked;
+                }
+                StyledToolTip {
+                    text: Translation.tr("Destroy Widget When Overview is out-of-focus\nTurn off if you have a large AniList lists or you have less computer ressources")
+                }
+            }
+        }
+
     }
 }

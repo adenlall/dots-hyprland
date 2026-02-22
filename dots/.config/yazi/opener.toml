@@ -1,0 +1,4 @@
+# [[rules]]
+# name = "Directory"
+# mime = "inode/directory"
+# use = "cd"  # This makes Yazi change directory internally

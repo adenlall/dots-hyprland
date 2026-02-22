@@ -10,7 +10,6 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
 import Quickshell.Hyprland
-import Quickshell.Widgets
 
 Scope {
     id: overviewScope
@@ -25,7 +24,7 @@ Scope {
 
         WlrLayershell.namespace: "quickshell:overview"
         WlrLayershell.layer: WlrLayer.Top
-        // WlrLayershell.keyboardFocus: GlobalStates.overviewOpen ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None
+        WlrLayershell.keyboardFocus: GlobalStates.overviewOpen ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None
         color: "transparent"
 
         mask: Region {
@@ -107,10 +106,26 @@ Scope {
                     visible: (panelWindow.searchingText == "")
                 }
             }
-            
-            // AnimeWidget{
 
-            // }
+            Item {
+                width: parent.width
+                height: 300
+                Component {
+                    id: animeWidgetComponent
+                    AnimeWidget {
+                        visible: (panelWindow.searchingText == "")
+                    }
+                }
+                Loader {
+                    width: parent.width
+                    height: 300
+                    active: (Config.options.bar.anime.dontDestroy || (GlobalStates.overviewOpen && (Config?.options.overview.enable ?? true))) && (Config.options.bar.anime.enable && Config.options.bar.anime.api_token && Config.options.bar.anime.id)
+                    sourceComponent: animeWidgetComponent
+                }
+            }
+
+
+        }
     }
 
     function toggleClipboard() {
@@ -221,5 +236,4 @@ Scope {
             overviewScope.toggleEmojis();
         }
     }
-}
 }

@@ -250,13 +250,13 @@ Singleton {
                 }
                 property list<string> screenList: [] // List of names, like "eDP-1", find out with 'hyprctl monitors' command
                 property JsonObject utilButtons: JsonObject {
-                    property bool showScreenSnip: true
+                    property bool showScreenSnip: false
                     property bool showColorPicker: false
                     property bool showMicToggle: false
                     property bool showKeyboardToggle: false
                     property bool showDarkModeToggle: true
                     property bool showPerformanceProfileToggle: true
-                    property bool showScreenRecord: false
+                    property bool showScreenRecord: true
                 }
                 property JsonObject workspaces: JsonObject {
                     property bool monochromeIcons: false
@@ -281,6 +281,7 @@ Singleton {
                     property int timezone: -6 // The difference to Greenwich time (GMT) in hours.
                     property bool timezone_auto: false // If omitted or set to auto, timezone is extracted from the system
                     property int fetchInterval: 2 // minutes
+                    property string adhan: ""
                     property JsonObject prayerControl: JsonObject {
                         property bool imsak    : false
                         property bool fajr     : true
@@ -292,6 +293,16 @@ Singleton {
                         property bool isha     : true
                         property bool midnight : false
                     }
+                }
+                property JsonObject anime: JsonObject {
+                    property bool enable: true
+                    property string api_token: ''
+                    property bool auth: false
+                    property bool dontDestroy: false
+                    property string id: ''
+                    property string name: ''
+                    property int fetchInterval: 5 // minutes
+                    
                 }
                 property JsonObject indicators: JsonObject {
                     property JsonObject notifications: JsonObject {
@@ -520,7 +531,7 @@ Singleton {
                     property bool textFadeIn: false
                 }
                 property JsonObject booru: JsonObject {
-                    property bool allowNsfw: false
+                    property bool allowNsfw: true
                     property string defaultProvider: "yandere"
                     property int limit: 20
                     property JsonObject zerochan: JsonObject {
@@ -545,19 +556,17 @@ Singleton {
                         property int columns: 5
                         property list<var> toggles: [
                             { "size": 2, "type": "network" },
-                            { "size": 2, "type": "bluetooth"  },
+                            { "size": 1, "type": "mic"  },
                             { "size": 1, "type": "idleInhibitor" },
-                            { "size": 1, "type": "mic" },
-                            { "size": 2, "type": "audio" },
-                            { "size": 2, "type": "nightLight" }
+                            { "size": 1, "type": "nightLight" },
                         ]
                     }
                 }
 
                 property JsonObject quickSliders: JsonObject {
-                    property bool enable: false
+                    property bool enable: true
                     property bool showMic: false
-                    property bool showVolume: true
+                    property bool showVolume: false
                     property bool showBrightness: true
                 }
             }
@@ -580,7 +589,7 @@ Singleton {
                 // https://doc.qt.io/qt-6/qtime.html#toString
                 property string format: "hh:mm AP"
                 property string shortDateFormat: "MM/dd"
-                property string dateWithYearFormat: "dd/MM/yyyy"
+                property string dateWithYearFormat: "MM/dd/yyyy"
                 property string dateFormat: "ddd, MM/dd"
                 property JsonObject pomodoro: JsonObject {
                     property int breakTime: 300
@@ -588,10 +597,13 @@ Singleton {
                     property int focus: 1500
                     property int longBreak: 900
                 }
+                // counting days from this starting point shows in search bar in Overview ~ could be counting or subtracting
+                property string timeCounting: "" // ex: "20260126" // "YYYYMMdd"
                 property bool secondPrecision: false
             }
 
             property JsonObject updates: JsonObject {
+                property bool enableCheck: true
                 property int checkInterval: 120 // minutes
                 property int adviseUpdateThreshold: 75 // packages
                 property int stronglyAdviseUpdateThreshold: 200 // packages

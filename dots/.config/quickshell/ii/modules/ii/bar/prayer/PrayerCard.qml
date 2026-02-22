@@ -15,6 +15,7 @@ Rectangle {
     property alias title: title.text
     property alias value: value.text
     property alias symbol: symbol.text
+    property alias diff: difference.text
     property color textColor
     property color bgColor
     property int fontWeight
@@ -43,6 +44,12 @@ Rectangle {
             // font.pixelSize: Appearance.font.pixelSize.small
             color: Appearance.colors.colOnSurfaceVariant
             font.weight: fontWeight
+        }
+        StyledText {
+            id: difference
+            Layout.alignment: Qt.AlignHCenter
+            font.pixelSize: Appearance.font.pixelSize.smaller
+            color: Appearance.m3colors.m3primary
         }
     }
 }

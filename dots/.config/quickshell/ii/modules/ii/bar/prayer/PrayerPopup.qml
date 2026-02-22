@@ -12,7 +12,7 @@ StyledPopup {
     ColumnLayout {
         id: columnLayout
         anchors.centerIn: parent
-        implicitWidth: Math.max(header.implicitWidth, gridLayout.implicitWidth)
+        implicitWidth: gridLayout.implicitWidth
         implicitHeight: gridLayout.implicitHeight
         spacing: 5
 
@@ -28,6 +28,7 @@ StyledPopup {
                     title:  modelData.pray
                     symbol: modelData.symbol
                     value:  modelData.time
+                    diff: modelData.diff
                     textColor: Appearance.m3colors.m3tertiary
                     fontWeight: modelData.pray===Prayer.data.next.prayer ? 900 : 400
                     bgColor: modelData.pray===Prayer.data.next.prayer ? Appearance.m3colors.m3onTertiary : Appearance.colors.colSurfaceContainerHigh

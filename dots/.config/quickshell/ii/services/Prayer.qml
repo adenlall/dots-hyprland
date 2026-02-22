@@ -78,11 +78,10 @@ Singleton {
             time:'',        // time witch the prayer srart
             symbol:''       // the icon that represent the prayer
         },
-        table:[]            // all prayer of the day ex: [{pray:"Asr", time:"23:00", symbol:"sun"},...]
+        table:[]            // all prayer ex: [{pray:"Asr", time:"23:00", symbol:"sun", diff:"+5h:2m"},...]
     })
 
     function getData() {
-        console.log('tessssssssssssss')
         const newDate = new Date();
         const time = newDate.getHours()+""+newDate.getMinutes();
         var rawPrayerTimes = prayTime.getTimes(newDate, [root.latitude, root.longitude], root.timezone_auto ? 'auto' : root.timezone);
@@ -108,6 +107,14 @@ Singleton {
         for(var i=0; i<arr.length; i++){
             if(time<arr[i].replace(":","")){
                 next = arr[i];
+                if (Math.abs(time-arr[i].replace(":","")) <= 2){
+                    Audio.playSystemSound(Config.options.bar.prayer.adhan)
+                    Quickshell.execDetached(["notify-send", 
+                        Translation.tr("Prayer : "+Object.keys(obj)[i]),
+                        Translation.tr("The Prayer is now at : "+next)
+                        , "-a", "Shell"
+                    ]);
+                }
                 break;
             }
         }
@@ -144,7 +151,12 @@ Singleton {
     }
 
     function getPrayersParsed(prayers){
-        const arr = Object.entries(prayers).map(([pray, time]) => ({ pray, time, symbol:symbols[pray] }))
+        const arr = Object.entries(prayers).map(([pray, time]) => ({
+                pray,
+                time,
+                symbol:symbols[pray],
+                diff: getRemaining(time)
+            }))
         return arr
     }
 
