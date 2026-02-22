@@ -156,4 +156,5 @@ RowLayout {
             }
         }
     }
+    DateCounting{}
 }

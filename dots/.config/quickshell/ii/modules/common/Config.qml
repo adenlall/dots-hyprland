@@ -589,7 +589,7 @@ Singleton {
                 // https://doc.qt.io/qt-6/qtime.html#toString
                 property string format: "hh:mm AP"
                 property string shortDateFormat: "MM/dd"
-                property string dateWithYearFormat: "dd/MM/yyyy"
+                property string dateWithYearFormat: "MM/dd/yyyy"
                 property string dateFormat: "ddd, MM/dd"
                 property JsonObject pomodoro: JsonObject {
                     property int breakTime: 300
@@ -597,6 +597,8 @@ Singleton {
                     property int focus: 1500
                     property int longBreak: 900
                 }
+                // counting days from this starting point shows in search bar in Overview ~ could be counting or subtracting
+                property string timeCounting: "" // ex: "20260126" // "YYYYMMdd"
                 property bool secondPrecision: false
             }
 
