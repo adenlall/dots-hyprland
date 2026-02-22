@@ -295,7 +295,7 @@ Singleton {
                     }
                 }
                 property JsonObject anime: JsonObject {
-                    property bool enable: true
+                    property bool enable: false
                     property string api_token: ''
                     property bool auth: false
                     property bool dontDestroy: false
@@ -531,7 +531,7 @@ Singleton {
                     property bool textFadeIn: false
                 }
                 property JsonObject booru: JsonObject {
-                    property bool allowNsfw: true
+                    property bool allowNsfw: false
                     property string defaultProvider: "yandere"
                     property int limit: 20
                     property JsonObject zerochan: JsonObject {
@@ -624,8 +624,8 @@ Singleton {
 
             property JsonObject workSafety: JsonObject {
                 property JsonObject enable: JsonObject {
-                    property bool wallpaper: false
-                    property bool clipboard: false
+                    property bool wallpaper: true
+                    property bool clipboard: true
                 }
                 property JsonObject triggerCondition: JsonObject {
                     property list<string> networkNameKeywords: ["airport", "cafe", "college", "company", "eduroam", "free", "guest", "public", "school", "university"]
