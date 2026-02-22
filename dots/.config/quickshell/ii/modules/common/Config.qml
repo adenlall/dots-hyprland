@@ -281,6 +281,7 @@ Singleton {
                     property int timezone: -6 // The difference to Greenwich time (GMT) in hours.
                     property bool timezone_auto: false // If omitted or set to auto, timezone is extracted from the system
                     property int fetchInterval: 2 // minutes
+                    property string adhan: ""
                     property JsonObject prayerControl: JsonObject {
                         property bool imsak    : false
                         property bool fajr     : true

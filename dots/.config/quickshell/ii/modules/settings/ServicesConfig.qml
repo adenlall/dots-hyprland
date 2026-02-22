@@ -4,6 +4,12 @@ import qs.services
 import qs.modules.common
 import qs.modules.common.widgets
 
+import Qt5Compat.GraphicalEffects
+import Quickshell
+import Quickshell.Io
+import qs.modules.common.functions
+
+
 
 ContentPage {
     forceWidth: true
@@ -337,6 +343,30 @@ ContentPage {
                 Config.options.bar.prayer.fetchInterval = value;
             }
         }
+
+
+        RippleButtonWithIcon {
+            Layout.fillWidth: true
+            materialIcon: "music_cast"
+            StyledToolTip {
+                text: Translation.tr("Pick your Adhan Sound")
+            }
+            onClicked: {
+                Quickshell.execDetached(`${Directories.selectAdhanScriptPath}`);
+            }
+            mainContentComponent: Component {
+                RowLayout {
+                    spacing: 10
+                    StyledText {
+                        font.pixelSize: Appearance.font.pixelSize.small
+                        text: ((Config.options.bar.prayer.adhan === "" || Config.options.bar.prayer.adhan === null) ? "Choose Adhan Audio File" : Config.options.bar.prayer.adhan)
+                        color: Appearance.colors.colOnSecondaryContainer
+                    }
+                }
+            }
+        }
+
+        
 
         ContentSubsection {
             title: Translation.tr("Prayers Option")
