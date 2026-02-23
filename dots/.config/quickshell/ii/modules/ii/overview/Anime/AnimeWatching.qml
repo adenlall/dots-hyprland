@@ -5,6 +5,8 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell.Widgets
 
+import qs.services
+
 Rectangle {
     property var animes: []   // ← put your real array here (can be empty!)
 
@@ -29,6 +31,7 @@ Rectangle {
             radius: 15
             Layout.fillWidth: true
             Layout.fillHeight: true
+
             color: Appearance.m3colors.m3onPrimaryContainer
 
             AnimePoster {
@@ -36,6 +39,10 @@ Rectangle {
                 h: parent.height
                 w: parent.width
                 rounded: 15
+            }
+            AnimeBadge {
+                margin: 5
+                text: animes[0]?.media?.nextAiringEpisode?.episode ? ("EP "+animes[0]?.media?.nextAiringEpisode?.episode+" : "+Anivice.getRemainingTime(animes[0]?.media?.nextAiringEpisode?.airingAt).totalDays + " days"):""
             }
         }
 
@@ -55,6 +62,10 @@ Rectangle {
                 w: parent.width
                 rounded: 15
             }
+            AnimeBadge {
+                margin: 5
+                text: animes[1]?.media?.nextAiringEpisode?.episode ? ("EP "+animes[1]?.media?.nextAiringEpisode?.episode+" : "+Anivice.getRemainingTime(animes[1]?.media?.nextAiringEpisode?.airingAt).totalDays + " days"):""
+            }
         }
 
         // ==================== SLOT 2 ====================
@@ -72,6 +83,10 @@ Rectangle {
                 h: parent.height
                 w: parent.width
                 rounded: 15
+            }
+            AnimeBadge {
+                margin: 5
+                text: animes[2]?.media?.nextAiringEpisode?.episode ? ("EP "+animes[2]?.media?.nextAiringEpisode?.episode+" : "+Anivice.getRemainingTime(animes[2]?.media?.nextAiringEpisode?.airingAt).totalDays + " days"):""
             }
         }
 
@@ -91,6 +106,10 @@ Rectangle {
                 w: parent.width
                 rounded: 15
             }
+            AnimeBadge {
+                margin: 5
+                text: animes[3]?.media?.nextAiringEpisode?.episode ? ("EP "+animes[3]?.media?.nextAiringEpisode?.episode+" : "+Anivice.getRemainingTime(animes[3]?.media?.nextAiringEpisode?.airingAt).totalDays + " days"):""
+            }
         }
 
         // ==================== SLOT 4 ====================
@@ -109,6 +128,10 @@ Rectangle {
                 w: parent.width
                 rounded: 15
             }
+            AnimeBadge {
+                margin: 5
+                text: animes[4]?.media?.nextAiringEpisode?.episode ? ("EP "+animes[4]?.media?.nextAiringEpisode?.episode+" : "+Anivice.getRemainingTime(animes[4]?.media?.nextAiringEpisode?.airingAt).totalDays + " days"):""
+            }
         }
 
         // ==================== SLOT 5 ====================
@@ -126,6 +149,10 @@ Rectangle {
                 h: parent.height
                 w: parent.width
                 rounded: 15
+            }
+            AnimeBadge {
+                margin: 5
+                text: animes[5]?.media?.nextAiringEpisode?.episode ? ("EP "+animes[5]?.media?.nextAiringEpisode?.episode+" : "+Anivice.getRemainingTime(animes[5]?.media?.nextAiringEpisode?.airingAt).totalDays + " days"):""
             }
         }
     }

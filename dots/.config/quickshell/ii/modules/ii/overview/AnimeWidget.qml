@@ -70,25 +70,10 @@ Rectangle {
                     spacing: 5
                     Repeater {
                         model: watchingList[3]?.media?.genres?.slice(0, 3);
-
-                        delegate: Rectangle {
-                            required property string modelData
-                            height: 32
-                            radius: 12
-                            color: Appearance.m3colors.m3onPrimary
-                            border.color: Appearance.m3colors.m3onPrimaryFixedVariant
-                            border.width: 1
-
-                            implicitWidth: textItem.implicitWidth + 20
-
-                            Text {
-                                id: textItem
-                                anchors.centerIn: parent
-                                text: modelData
-                                color: Appearance.m3colors.m3primary
-                                font.pixelSize: Appearance.font.pixelSize.small
+                        delegate: AnimeBadge {
+                                required property string modelData
+                                text:modelData
                             }
-                        }
                     }
                 }
             }
