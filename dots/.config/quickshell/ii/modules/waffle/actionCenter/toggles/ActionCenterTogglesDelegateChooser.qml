@@ -13,6 +13,7 @@ import qs.modules.waffle.actionCenter.bluetooth
 import qs.modules.waffle.actionCenter.nightLight
 import qs.modules.waffle.actionCenter.volumeControl
 import qs.modules.waffle.actionCenter.wifi
+import qs.modules.waffle.actionCenter.wireguard
 
 DelegateChooser {
     id: root
@@ -109,6 +110,17 @@ DelegateChooser {
             icon: WIcons.internetIcon
             menu: Component {
                 WifiControl {}
+            }
+        }
+    }
+    DelegateChoice {
+        roleValue: "wireguard"
+        ActionCenterToggleButton {
+            toggleModel: WireguardToggle {}
+            name: toggleModel.statusText
+            icon: "vpn_key"
+            menu: Component {
+                WireguardControl {}
             }
         }
     }

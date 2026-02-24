@@ -20,9 +20,15 @@ AbstractQuickPanel {
         padding: 5
         color: Appearance.colors.colLayer1
 
+
         NetworkToggle {
             altAction: () => {
                 root.openWifiDialog();
+            }
+        }
+        WireguardToggle {
+            altAction: () => {
+                root.openWireguardDialog();
             }
         }
         BluetoothToggle {
