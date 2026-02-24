@@ -126,6 +126,7 @@ Variants {
             anchors.fill: parent
             clip: true
 
+            AutoWallpaper{}
             // Wallpaper
             StyledImage {
                 id: wallpaper

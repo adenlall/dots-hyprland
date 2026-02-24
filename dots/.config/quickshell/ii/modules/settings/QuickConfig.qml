@@ -226,6 +226,29 @@ ContentPage {
                 Config.options.appearance.transparency.enable = checked;
             }
         }
+        ContentSubsection {
+            title: Translation.tr("Auto Switch wallpaper")
+            ConfigSwitch {
+                buttonIcon: "blur_on"
+                text: Translation.tr("Enable")
+                checked: Config.options.background.autoSwitch.enable
+                onCheckedChanged: {
+                    Config.options.background.autoSwitch.enable = checked;
+                }
+            }
+
+            ConfigSpinBox {
+                icon: "av_timer"
+                text: Translation.tr("Switching interval (m)")
+                value: Config.options.background.autoSwitch.interval
+                from: 1
+                to: 1000
+                stepSize: 1
+                onValueChanged: {
+                    Config.options.background.autoSwitch.interval = value;
+                }
+            }
+        }
     }
 
     ContentSection {
