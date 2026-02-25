@@ -22,7 +22,6 @@ Singleton {
     readonly property list<var> parsedConfigs: []
 
 
-    // Control
     function enableWireguard(action = false): void {
         killtProcess.running = action;
         root.wireguardEnabled = action;
@@ -46,6 +45,11 @@ Singleton {
         rescanProcess.running = true;
     }
 
+    function removeConfig(conf): void {
+        stripProcess.conf = conf;
+        stripProcess.running = true;
+    }
+
     Process {
         id: disConnectProcess
         running: false
@@ -55,6 +59,18 @@ Singleton {
                 root.name = ""
                 root.wireguardTarget = ""
                 root.wireguardStatus = false
+            }
+        }
+    }
+    
+    Process {
+        id: stripProcess
+        property string conf:""
+        running: false
+        command: ["pkexec", Directories.wireguardPortalScriptPath, "strip", stripProcess.conf]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                stripProcess.conf = "";
             }
         }
     }

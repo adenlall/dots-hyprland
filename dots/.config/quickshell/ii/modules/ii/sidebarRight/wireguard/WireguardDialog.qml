@@ -50,7 +50,7 @@ WindowDialog {
         DialogButton {
             buttonText: Translation.tr("Details")
             onClicked: {
-                Quickshell.execDetached(["bash", "-c", `${Network.ethernet ? Config.options.apps.networkEthernet : Config.options.apps.network}`]);
+                Qt.openUrlExternally("https://man.archlinux.org/man/wg-quick.8.en");
                 GlobalStates.sidebarRightOpen = false;
             }
         }

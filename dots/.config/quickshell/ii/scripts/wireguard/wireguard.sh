@@ -95,6 +95,9 @@ case "$ACTION" in
     pull)
         ls /etc/wireguard/
         ;;
+    strip)
+        wg-quick strip "$CONFIG_FILE"
+        ;;
     up)
         wg-quick up "$CONFIG_FILE"
         info "VPN is up. Current status:"
