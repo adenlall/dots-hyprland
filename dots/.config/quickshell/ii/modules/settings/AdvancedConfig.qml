@@ -3,6 +3,10 @@ import qs.services
 import qs.modules.common
 import qs.modules.common.widgets
 
+import qs.services.network
+import QtQuick.Layouts
+import Quickshell
+
 ContentPage {
     forceWidth: true
 
@@ -90,6 +94,83 @@ ContentPage {
         }
     }
 
+
+    ContentSection {
+        icon: "vpn_key"
+        title: Translation.tr("Wireguard VPN")
+
+        ConfigRow{
+            RippleButtonWithIcon {
+                Layout.fillWidth: true
+                // materialIcon: "music_cast"
+                StyledToolTip {
+                    text: Translation.tr("Browse for a Wireguard config file")
+                }
+                onClicked: {
+                    Quickshell.execDetached(Directories.selectWireguardConfigScriptPath);
+                }
+                mainContentComponent: Component {
+                    RowLayout {
+                        spacing: 10
+                        StyledText {
+                            font.pixelSize: Appearance.font.pixelSize.small
+                            text: ((Config.options.networking.wireguard.tempConfigPath===""||Config.options.networking.wireguard.tempConfigPath===null) ? "Pick Wireguard .conf File" : Config.options.networking.wireguard.tempConfigPath)
+                            color: Appearance.colors.colOnSecondaryContainer
+                        }
+                    }
+                }
+            }
+            SelectionGroupButton {
+                id: paletteButton
+                buttonIcon: "add"
+                buttonText: "Add to /etc/wireguard"
+                // toggled: root.currentValue == modelData.value
+                onClicked: {
+                    Wireguard.addConfig();
+                }
+            }
+        }
+
+        ContentSubsection { // Show all configs at /etc/wireguard
+            title: Translation.tr("/etc/wireguard configs")
+            Layout.fillWidth: true
+            Repeater {
+                model: Wireguard.parsedConfigs
+                ConfigRow {
+                    id: ---
+                    visible: true
+                    RippleButton {
+                        Layout.fillWidth: true
+                        implicitHeight: contentItem.implicitHeight + 8 * 2
+                        font.pixelSize: Appearance.font.pixelSize.small
+                        contentItem: RowLayout {
+                            spacing: 10
+                            OptionalMaterialSymbol {
+                                icon: "vpn_key"
+                                iconSize: Appearance.font.pixelSize.larger
+                            }
+                            StyledText {
+                                Layout.fillWidth: true
+                                text: modelData
+                                color: Appearance.colors.colOnSecondaryContainer
+                            }
+                            SelectionGroupButton {
+                                id: paletteButton
+                                buttonIcon: "delete"
+                                buttonText: "Delete"
+                                // toggled: root.currentValue == modelData.value
+                                onClicked: {
+                                    Wireguard.removeConfig(modelData);
+                                    Wireguard.rescanWireguard()
+                                    // ("lay-"+modelData).visible = false
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 
 }

@@ -50,6 +50,29 @@ Singleton {
         stripProcess.running = true;
     }
 
+    function addConfig(): void {
+        if(Config.options.networking.wireguard.tempConfigPath){
+            addConfigProcess.running = true
+        }else{
+            Quickshell.execDetached(["notify-send", 
+                Translation.tr("Wireguard Shell"), 
+                Translation.tr("No Config Selected")
+                , "-a", "Shell"
+            ]);
+        }
+    }
+    
+    Process {
+        id: addConfigProcess
+        running: false
+        command: ["pkexec", Directories.wireguardPortalScriptPath, "save", Config.options.networking.wireguard.tempConfigPath]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                Config.options.networking.wireguard.tempConfigPath = ""
+            }
+        }
+    }
+
     Process {
         id: disConnectProcess
         running: false

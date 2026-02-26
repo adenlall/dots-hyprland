@@ -352,7 +352,7 @@ ContentPage {
                 text: Translation.tr("Pick your Adhan Sound")
             }
             onClicked: {
-                Quickshell.execDetached(`${Directories.selectAdhanScriptPath}`);
+                Wireguard.addConfig();
             }
             mainContentComponent: Component {
                 RowLayout {
@@ -365,7 +365,6 @@ ContentPage {
                 }
             }
         }
-
         
 
         ContentSubsection {

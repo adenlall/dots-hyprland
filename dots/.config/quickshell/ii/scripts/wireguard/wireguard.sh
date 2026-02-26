@@ -96,7 +96,10 @@ case "$ACTION" in
         ls /etc/wireguard/
         ;;
     strip)
-        wg-quick strip "$CONFIG_FILE"
+        rm /etc/wireguard/"$CONFIG_FILE".conf
+        ;;
+    save)
+        cp "$CONFIG_FILE" /etc/wireguard
         ;;
     up)
         wg-quick up "$CONFIG_FILE"
