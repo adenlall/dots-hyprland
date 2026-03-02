@@ -155,9 +155,15 @@ Singleton {
         stdout: StdioCollector {
             id: configsraw
             onStreamFinished: {
-                const parsed = configsraw.text.trim().replace(/.conf/g,"").split("\n");
-                root.parsedConfigs = parsed
-                liveProcess.running = true
+                if(configsraw.text === ""){
+                    // console.log("ELSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
+                    root.parsedConfigs = []
+                }else{
+                    // console.log(">>>>>>>>>>>>>>>>>>>>>>",configsraw.text,configsraw.text==="" )
+                    const parsed = configsraw.text.trim().replace(/.conf/g,"").split("\n");
+                    root.parsedConfigs = parsed
+                    liveProcess.running = true
+                }
             }
         }
     }

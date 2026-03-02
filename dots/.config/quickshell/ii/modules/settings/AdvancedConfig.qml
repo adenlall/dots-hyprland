@@ -123,10 +123,12 @@ ContentPage {
             SelectionGroupButton {
                 id: paletteButton
                 buttonIcon: "add"
-                buttonText: "Add to /etc/wireguard"
+                buttonText: "Copy to /etc/wireguard"
                 // toggled: root.currentValue == modelData.value
                 onClicked: {
                     Wireguard.addConfig();
+                    Wireguard.rescanWireguard()
+                    Wireguard.rescanWireguard()
                 }
             }
         }
@@ -134,40 +136,47 @@ ContentPage {
         ContentSubsection { // Show all configs at /etc/wireguard
             title: Translation.tr("/etc/wireguard configs")
             Layout.fillWidth: true
-            Repeater {
-                model: Wireguard.parsedConfigs
-                ConfigRow {
-                    id: ---
-                    visible: true
-                    RippleButton {
-                        Layout.fillWidth: true
-                        implicitHeight: contentItem.implicitHeight + 8 * 2
-                        font.pixelSize: Appearance.font.pixelSize.small
-                        contentItem: RowLayout {
-                            spacing: 10
-                            OptionalMaterialSymbol {
-                                icon: "vpn_key"
-                                iconSize: Appearance.font.pixelSize.larger
-                            }
-                            StyledText {
-                                Layout.fillWidth: true
-                                text: modelData
-                                color: Appearance.colors.colOnSecondaryContainer
-                            }
-                            SelectionGroupButton {
-                                id: paletteButton
-                                buttonIcon: "delete"
-                                buttonText: "Delete"
-                                // toggled: root.currentValue == modelData.value
-                                onClicked: {
-                                    Wireguard.removeConfig(modelData);
-                                    Wireguard.rescanWireguard()
-                                    // ("lay-"+modelData).visible = false
+            visible: Wireguard.parsedConfigs !== []
+            ContentSubsection{
+                Layout.fillWidth: true
+                Repeater {
+                    model: Wireguard.parsedConfigs
+                    ConfigRow {
+                        RippleButton {
+                            Layout.fillWidth: true
+                            implicitHeight: contentItem.implicitHeight + 8 * 2
+                            font.pixelSize: Appearance.font.pixelSize.small
+                            contentItem: RowLayout {
+                                spacing: 10
+                                OptionalMaterialSymbol {
+                                    icon: "vpn_key"
+                                    iconSize: Appearance.font.pixelSize.larger
+                                }
+                                StyledText {
+                                    Layout.fillWidth: true
+                                    text: modelData
+                                    color: Appearance.colors.colOnSecondaryContainer
+                                }
+                                SelectionGroupButton {
+                                    id: paletteButton
+                                    buttonIcon: "delete"
+                                    buttonText: "Delete"
+                                    // toggled: root.currentValue == modelData.value
+                                    onClicked: {
+                                        Wireguard.removeConfig(modelData);
+                                        Wireguard.rescanWireguard()
+                                        Wireguard.rescanWireguard()
+                                    }
                                 }
                             }
                         }
                     }
                 }
+            }
+            StyledText{
+                anchors.centerIn: parent
+                text: "No .conf file founds at /etc/wireguard"
+                color: Appearance.colors.colOnSecondaryContainer
             }
         }
     }
