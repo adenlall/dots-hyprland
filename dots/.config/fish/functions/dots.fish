@@ -16,7 +16,8 @@ function dots --wraps='cd ~/.config' --description 'Manage the dots on ~/.dotsys
                 case kill
                     echo "killing qs and pulling with fast"
                     kill qs
-                    ~/.dotsys/setup install --skip-alldeps --skip-allgreeting || qs -c ii
+                    ~/.dotsys/setup install --skip-alldeps --skip-allgreeting
+                    qs -c ii
                 case ''
                     echo "pulling with --skip-alldeps --skip-allgreeting"
                     ~/.dotsys/setup install --skip-alldeps --skip-allgreeting
