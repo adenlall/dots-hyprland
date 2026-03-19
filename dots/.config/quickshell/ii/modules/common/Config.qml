@@ -127,9 +127,9 @@ Singleton {
                     property bool enableQtApps: true
                     property bool enableTerminal: true
                     property JsonObject terminalGenerationProps: JsonObject {
-                        property real harmony: 0.6
+                        property real harmony: 0.7
                         property real harmonizeThreshold: 100
-                        property real termFgBoost: 0.35
+                        property real termFgBoost: 0.3
                         property bool forceDarkMode: false
                     }
                 }
