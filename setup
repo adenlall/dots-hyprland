@@ -86,6 +86,7 @@ case ${SUBCMD_NAME} in
     fi
     if [[ "${SKIP_ALLFILES}" != true ]]; then
       source ${SUBCMD_DIR}/3.files.sh
+      source ${SUBCMD_DIR}/3.files.polkit.sh
     fi
     ;;
   install-deps)
