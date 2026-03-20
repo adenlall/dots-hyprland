@@ -28,7 +28,7 @@ Singleton {
                 Appearance.m3colors[m3Key] = json[key]
             }
         }
-        
+        accentColorProcess.running = true
         Appearance.m3colors.darkmode = (Appearance.m3colors.m3background.hslLightness < 0.5)
     }
 
@@ -36,6 +36,11 @@ Singleton {
         resetFilePathNextWallpaperChange.enabled = true
     }
 
+    Process {
+        id: accentColorProcess
+        command: [Directories.folderAccentColor]
+    }
+    
     Connections {
         id: resetFilePathNextWallpaperChange
         enabled: false
