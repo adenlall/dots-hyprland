@@ -609,5 +609,7 @@
   "Latitude": "Latitude",
   "Longitude": "Longitude",
   "Prayers Option": "Prayers Option",
-  "Coordinates": "Coordinates"
+  "Coordinates": "Coordinates",
+  "Pin": "Pin",
+  "Unpin": "Unpin"
 }
