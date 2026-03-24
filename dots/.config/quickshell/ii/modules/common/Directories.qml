@@ -42,7 +42,9 @@ Singleton {
     property string cliphistDecode: FileUtils.trimFileProtocol(`/tmp/quickshell/media/cliphist`)
     property string screenshotTemp: "/tmp/quickshell/media/screenshot"
     property string wallpaperSwitchScriptPath: FileUtils.trimFileProtocol(`${Directories.scriptPath}/colors/switchwall.sh`)
-    property string folderAccentColor: FileUtils.trimFileProtocol(`${Directories.scriptPath}/colors/folder_accent_color.sh`)
+    property string themeWhiteSurFolder: FileUtils.trimFileProtocol(`${Directories.scriptPath}/colors/folders/whitesur.sh`)
+    property string themePapirusFolder: FileUtils.trimFileProtocol(`${Directories.scriptPath}/colors/folders/papirus.sh`)
+    property string iconsHelper: FileUtils.trimFileProtocol(`${Directories.scriptPath}/icons/helper.sh`)
     property string selectAdhanScriptPath: FileUtils.trimFileProtocol(`${Directories.scriptPath}/prayer/adhan.sh`)
     property string selectWireguardConfigScriptPath: FileUtils.trimFileProtocol(`${Directories.scriptPath}/wireguard/file_picker.sh`)
     property string wireguardPortalScriptPath: FileUtils.trimFileProtocol(`${Directories.scriptPath}/wireguard/wireguard.sh`)

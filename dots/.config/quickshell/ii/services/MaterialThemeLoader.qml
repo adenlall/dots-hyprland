@@ -5,6 +5,7 @@ import qs.modules.common
 import QtQuick
 import Quickshell
 import Quickshell.Io
+import qs.services
 
 /**
  * Automatically reloads generated material colors.
@@ -28,17 +29,12 @@ Singleton {
                 Appearance.m3colors[m3Key] = json[key]
             }
         }
-        accentColorProcess.running = true
+        Theming.theme()
         Appearance.m3colors.darkmode = (Appearance.m3colors.m3background.hslLightness < 0.5)
     }
 
     function resetFilePathNextTime() {
         resetFilePathNextWallpaperChange.enabled = true
-    }
-
-    Process {
-        id: accentColorProcess
-        command: [Directories.folderAccentColor]
     }
     
     Connections {

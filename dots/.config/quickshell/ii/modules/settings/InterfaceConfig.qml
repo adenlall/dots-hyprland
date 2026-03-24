@@ -8,6 +8,43 @@ ContentPage {
     forceWidth: true
 
     ContentSection {
+        icon: "colors"
+        title: Translation.tr("Icon themes")
+
+        ContentSubsection {
+            title: Translation.tr("Icon Theme Selector ~/.local/share/icons")
+            tooltip: Translation.tr("You may still need to manually refresh session to fully apply theme")
+            ConfigSelectionArray {
+                currentValue: Theming.currentTheme.trim()
+                onSelected: newValue => {
+                    Theming.setTheme(newValue)
+                }
+                options: Theming.installedThemes.filter(Boolean).map(icon => { return {
+                  displayName: icon.trim(),
+                  value: icon.trim()
+                  }
+                })
+            }
+        }
+
+        ConfigSwitch {
+            buttonIcon: "palette"
+            text: Translation.tr("Accent color folder theming for supported Icon themes")
+            checked: Config.options.appearance.palette.accentColorFolderTheming
+            onCheckedChanged: {
+                Config.options.appearance.palette.accentColorFolderTheming = checked;
+                if(checked){
+                    Theming.theme()
+                }
+            }
+            StyledToolTip {
+                text: Translation.tr("Only WhiteSur supported for now, more comming up!")
+            }
+        }
+
+    }
+
+    ContentSection {
         icon: "keyboard"
         title: Translation.tr("Cheat sheet")
 

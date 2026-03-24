@@ -87,7 +87,7 @@ case ${SUBCMD_NAME} in
     if [[ "${SKIP_ALLFILES}" != true ]]; then
       source ${SUBCMD_DIR}/3.files.sh
       source ${SUBCMD_DIR}/3.files.polkit.sh
-      source ${SUBCMD_DIR}/3.files.folder-theme.sh
+      source ${SUBCMD_DIR}/3.files.icon-themes.sh
     fi
     ;;
   install-deps)
