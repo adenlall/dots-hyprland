@@ -12,13 +12,13 @@ while true; do
         break
     fi
     case "$ANSWER" in
-        [Yy] ) $job=1; break ;;
+        [Yy] ) job=1; break ;;
         [Nn] ) echo "Aborting!.";  break ;;
         * )    echo "Please answer Y or n, or press Enter for yes."; break ;;
     esac
 done
 
-if (( $job==1 )); then
+if (( job==1 )); then
 
     yay -S --needed fzf
     themes=("None" "All" "Papirus" "WhiteSur")

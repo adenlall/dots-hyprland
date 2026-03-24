@@ -8,7 +8,7 @@ if [ ! -f "$SOURCE" ]; then
     echo "Error: Source file '$SOURCE' does not exist or is not a regular file."
     exit 1
 fi
-job=0
+polkit=0
 if [ -e "$DESTFILE" ]; then
     echo "Warning: Destination '$DESTFILE' already exists."
     echo "Overriding system files can be risky, especially files related to polkit."
@@ -20,14 +20,14 @@ if [ -e "$DESTFILE" ]; then
             break   # empty = yes, proceed
         fi
         case "$ANSWER" in
-            [Yy] ) $job=1; break ;;
+            [Yy] ) polkit=1; break ;;
             [Nn] ) echo "Copy cancelled.";break ;;
             * )    break ;;
         esac
     done
 fi
 
-if (( job == 1 )); then
+if (( polkit == "1" )); then
 
     TEMP_FILE=$(mktemp)
     sed "s/<USERNAME>/$USERNAME/g" "$SOURCE" > "$TEMP_FILE"
