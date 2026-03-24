@@ -15,7 +15,7 @@ if [ -e "$DESTFILE" ]; then
     echo "This might affect system permissions and authentication."
 
     while true; do
-        read -p "Are you sure you want to overwrite it? (Y/n) [default=N] " -r ANSWER
+        read -p "Are you sure you want to overwrite it? (Y/n) [default = N] " -r ANSWER
         if [[ -z "$ANSWER" ]]; then
             break   # empty = yes, proceed
         fi

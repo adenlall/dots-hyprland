@@ -7,14 +7,14 @@ while true; do
     printf "${STY_RED}${STY_BOLD}"
     printf "\t- xmlstarlet : extra/xmlstarlet\n"
     printf "${STY_YELLOW}${STY_RST}\n"
-    read -p "Enable && Install requirements ? (Y/n) [default=N] " -r ANSWER
+    read -p "Enable && Install requirements ? (Y/n) [default = Y] " -r ANSWER
     if [[ -z "$ANSWER" ]]; then
         break
     fi
     case "$ANSWER" in
         [Yy] ) job=1; break ;;
         [Nn] ) echo "Aborting!.";  break ;;
-        * )    echo "Please answer Y or n, or press Enter for yes."; break ;;
+        * )    job=1; echo "Please answer Y or n, or press Enter for yes."; break ;;
     esac
 done
 
