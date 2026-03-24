@@ -3,6 +3,8 @@ COLOR_FILE_PATH="${XDG_STATE_HOME:-$HOME/.local/state}/quickshell/user/generated
 
 # Define an array of possible VSCode settings file paths for various forks
 settings_paths=(
+    "$HOME/.var/app/com.vscodium.codium-insiders/config/VSCodium - Insiders/User/settings.json"
+    "$HOME/.var/app/com.vscodium.codium/config/VSCodium/User/settings.json"
     "${XDG_CONFIG_HOME:-$HOME/.config}/Code/User/settings.json"
     "${XDG_CONFIG_HOME:-$HOME/.config}/VSCodium/User/settings.json"
     "${XDG_CONFIG_HOME:-$HOME/.config}/Code - OSS/User/settings.json"
