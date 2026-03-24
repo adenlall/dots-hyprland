@@ -174,6 +174,7 @@ ContentPage {
                 }
             }
             StyledText{
+                opacity: Wireguard.parsedConfigs.length > 0 ? 0 : 1
                 anchors.centerIn: parent
                 text: "No .conf file founds at /etc/wireguard"
                 color: Appearance.colors.colOnSecondaryContainer
