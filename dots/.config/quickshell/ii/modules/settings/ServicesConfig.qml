@@ -345,27 +345,29 @@ ContentPage {
         }
 
 
-        RippleButtonWithIcon {
-            Layout.fillWidth: true
-            materialIcon: "music_cast"
-            StyledToolTip {
-                text: Translation.tr("Pick your Adhan Sound")
-            }
-            onClicked: {
-                Wireguard.addConfig();
-            }
-            mainContentComponent: Component {
-                RowLayout {
-                    spacing: 10
-                    StyledText {
-                        font.pixelSize: Appearance.font.pixelSize.small
-                        text: ((Config.options.bar.prayer.adhan === "" || Config.options.bar.prayer.adhan === null) ? "Choose Adhan Audio File" : Config.options.bar.prayer.adhan)
-                        color: Appearance.colors.colOnSecondaryContainer
+
+        ConfigRow{
+            RippleButtonWithIcon {
+                Layout.fillWidth: true
+                // materialIcon: "music_cast"
+                StyledToolTip {
+                    text: Translation.tr("Select your Adhan Sound")
+                }
+                onClicked: {
+                    Quickshell.execDetached(Directories.selectAdhanScriptPath);
+                }
+                mainContentComponent: Component {
+                    RowLayout {
+                        spacing: 10
+                        StyledText {
+                            font.pixelSize: Appearance.font.pixelSize.small
+                            text: ((Config.options.bar.prayer.adhan === "" || Config.options.bar.prayer.adhan === null) ? "Choose Adhan Audio File" : Config.options.bar.prayer.adhan)
+                            color: Appearance.colors.colOnSecondaryContainer
+                        }
                     }
                 }
             }
         }
-        
 
         ContentSubsection {
             title: Translation.tr("Prayers Option")

@@ -5,8 +5,8 @@ function dots --wraps='cd ~/.config' --description 'Manage the dots on ~/.dotsys
         case pull
             switch "$argv[2]"
                 case fast
-                    echo "pulling with --skip-backup --skip-alldeps --skip-allgreeting"
-                    ~/.dotsys/setup install --skip-backup --skip-alldeps --skip-allgreeting
+                    echo "pulling with --skip-backup --skip-allfiles --skip-alldeps --skip-allgreeting"
+                    ~/.dotsys/setup install --skip-backup --skip-allfiles --skip-alldeps --skip-allgreeting
                 case files
                     echo "pulling with --skip-backup --skip-alldeps"
                     ~/.dotsys/setup install --skip-backup --skip-alldeps

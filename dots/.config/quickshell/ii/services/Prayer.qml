@@ -17,7 +17,7 @@ Singleton {
     readonly property real longitude: Config.options.bar.prayer.longitude
     readonly property real timezone: Config.options.bar.prayer.timezone
     readonly property real timezone_auto: Config.options.bar.prayer.timezone_auto
-    property var prayTime: new PrayTimeModule.PrayTime("ISNA")
+    property var prayTime: new PrayTimeModule.PrayTime()
     
     readonly property bool imsak    : Config.options.bar.prayer.prayerControl.imsak
     readonly property bool fajr     : Config.options.bar.prayer.prayerControl.fajr
@@ -84,7 +84,10 @@ Singleton {
     function getData() {
         const newDate = new Date();
         const time = newDate.getHours()+""+newDate.getMinutes();
+        
+        prayTime.adjust({fajr:15.79, asr:0.97, dhuhr: '-4 min', maghrib: '-4 min', isha:14.2})
         var rawPrayerTimes = prayTime.getTimes(newDate, [root.latitude, root.longitude], root.timezone_auto ? 'auto' : root.timezone);
+        
         var prayerTimes = getPrayersPreParsed(rawPrayerTimes);
         var nnext = getNext(time, prayerTimes);
         root.data = {
@@ -107,8 +110,8 @@ Singleton {
         for(var i=0; i<arr.length; i++){
             if(time<arr[i].replace(":","")){
                 next = arr[i];
-                if (Math.abs(time-arr[i].replace(":","")) <= 2){
-                    Audio.playSystemSound(Config.options.bar.prayer.adhan)
+                if (Math.abs(time-arr[i].replace(":","")) <= 1){
+                    Quickshell.execDetached(["mpv", "--no-video", Config.options.bar.prayer.adhan])
                     Quickshell.execDetached(["notify-send", 
                         Translation.tr("Prayer : "+Object.keys(obj)[i]),
                         Translation.tr("The Prayer is now at : "+next)
