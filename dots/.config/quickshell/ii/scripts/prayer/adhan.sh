@@ -1,10 +1,7 @@
 #!/bin/bash
 JSON_FILE="$HOME/.config/illogical-impulse/config.json"
 
-selected_file="$(kdialog --getopenfilename \
-    "$HOME" \
-    "Audio Files (*.mp3 *.wav *.flac *.ogg *.m4a *.mpega)" \
-    --title "Choose Adhan")"
+selected_file=$(GTK_USE_PORTAL=1 zenity --file-selection --title="Choose Adhan")
 
 if [[ -n "$selected_file" && -f "$selected_file" ]]; then
 

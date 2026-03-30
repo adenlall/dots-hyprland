@@ -2,10 +2,7 @@
 
 CONFIG_FILE="$HOME/.config/illogical-impulse/config.json"
 
-selected_file="$(kdialog --getopenfilename \
-    "$HOME" \
-    "Config Files (*.config *.conf)" \
-    --title "Choose Wireguard Config File")"
+selected_file=$(GTK_USE_PORTAL=1 zenity --file-selection --title="Choose Wireguard Config File" --filename="$HOME")
 
 if [[ -n "$selected_file" && -f "$selected_file" ]]; then
     jq --arg path "$selected_file" \
@@ -14,4 +11,4 @@ if [[ -n "$selected_file" && -f "$selected_file" ]]; then
     echo "Saved File in config.json"
 else
     echo "No file selected."
-fi
+fi   
