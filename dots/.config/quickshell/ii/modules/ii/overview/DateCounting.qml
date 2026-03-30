@@ -16,6 +16,23 @@ RowLayout {
     Layout.rightMargin: 10
     implicitHeight: 40
 
+    function parseDate(dateStr) {
+        if (!dateStr || dateStr.length !== 8) return null;
+        const year = parseInt(dateStr.substring(0, 4), 10);
+        const month = parseInt(dateStr.substring(4, 6), 10) - 1;
+        const day = parseInt(dateStr.substring(6, 8), 10);
+        return new Date(year, month, day);
+    }
+
+    function dateDiff(dateStr1, dateStr2) {
+        const d1 = parseDate(dateStr1);
+        const d2 = parseDate(dateStr2);
+        if (!d1 || !d2) return 0;
+        const diffTime = d1 - d2;
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        return diffDays;
+    }
+
     Rectangle {
         id: bg
         anchors.fill: parent
@@ -42,9 +59,9 @@ RowLayout {
             font.pixelSize: Appearance.font.pixelSize.small
             font.weight: 800
             color: Appearance.m3colors.m3onTertiary
-            text: DateTime.rawDate-Config.options.time.timeCounting + " days "
+            // Call dateDiff with the two date strings
+            text: dateDiff(DateTime.rawDate, Config.options.time.timeCounting) + " days"
             Layout.alignment: Qt.AlignVCenter
         }
     }
-    
 }
