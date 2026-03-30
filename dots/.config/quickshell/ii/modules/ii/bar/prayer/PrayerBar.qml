@@ -20,7 +20,6 @@ MouseArea {
         if (mouse.button === Qt.RightButton) {
             Prayer.getData();
             console.log()
-            Quickshell.execDetached(["mpv", "--no-video", Config.options.bar.prayer.adhan])
             Quickshell.execDetached(["notify-send", 
                 Translation.tr("Prayer"), 
                 Translation.tr("Refreshing (manually triggered)")
