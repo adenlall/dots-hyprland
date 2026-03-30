@@ -106,6 +106,11 @@ Scope {
                     visible: (panelWindow.searchingText == "")
                 }
             }
+            
+            Item {
+                height: 30   // ← desired top margin
+                width: parent.width
+            }
 
             Item {
                 width: parent.width
