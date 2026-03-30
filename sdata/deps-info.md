@@ -24,7 +24,7 @@ Tips:
   - Used in Hyprland and Quickshell config.
 
 ## illogical-impulse-backlight
-- `geoclue`
+- `geoclue` Removed ( GPS on archlinux ricing c'mon! )
   - Which demo agent used in Quickshell config.
 - `brightnessctl`
   - Used in Hyprland and Quickshell config.
@@ -54,14 +54,16 @@ Tips:
   - Used in install script.
 - `go-yq`
   - Used in install script.
+- `fzf`
+  - Used inside install script and yazi.
 
 ## illogical-impulse-fonts-themes
 - `adw-gtk-theme-git`
   - [source](https://github.com/lassekongo83/adw-gtk3)
   - Used in Quickshell config.
-- `breeze`
+- `breeze` Removed
   - Used in kdeglobals config.
-- `breeze-plus`
+- `breeze-plus` Removed
   - [source](https://github.com/mjkim0727/breeze-plus)
   - Used in kde-material-you-colors config.
 - `darkly-bin`
@@ -70,12 +72,18 @@ Tips:
   - Used in Fish config: `alias ls 'eza --icons'`
 - `fish`
   - Widely used.
+- `yazi` Added
+  - Widely used.
+- `zenity` Added
+  - used in many file pciker scripts.
 - `fontconfig`
   - Basic component which is nearly a must.
 - `kitty`
   - Used in fuzzel, Hyprland, kdeglobals and Quickshell config; kitty config is also included as dots.
 - `matugen-bin`
   - Used in Quickshell.
+- `xmlstarlet`
+  - Used in folder theming script.
 - `otf-space-grotesk`
   - [source](https://events.ccc.de/congress/2024/infos/styleguide.html)
   - Used in Quickshell and matugen config.
@@ -115,7 +123,7 @@ Tips:
   - Provide command `kcmshell6 kcm_networkmanagement` used by Quickshell network functionality.
 - `polkit-kde-agent`
   - Basic component.
-- `dolphin`
+- `dolphin` Removed [ yazi! ]
   - Used in Hyprland and Quickshell config.
 - `systemsettings`
   - Used in Hyprland `keybinds.conf`.
@@ -220,8 +228,12 @@ Extra dependencies.
 - `kdialog`
 - `syntax-highlighting`
 
-## illogical-impulse-bibata-modern-classic-bin
+## illogical-impulse-bibata-modern-classic-bin Removed
 - [source](https://github.com/ful1e5/Bibata_Cursor)
+- Used in Hyprland config, not necessary.
+
+## illogical-impulse-bibata-rainbow-bin Added
+- [source](https://github.com/ful1e5/Bibata_Cursor_Rainbow)
 - Used in Hyprland config, not necessary.
 
 ## illogical-impulse-microtex-git

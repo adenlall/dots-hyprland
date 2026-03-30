@@ -1,13 +1,13 @@
-pkgname=illogical-impulse-bibata-modern-classic-bin
-pkgver=2.0.6
+pkgname=illogical-impulse-bibata-rainbow-bin
+pkgver=1.1.2
 pkgrel=1
 pkgdesc="Material Based Cursor Theme, installed for illogical-impulse dotfiles"
 arch=('any')
-url="https://github.com/ful1e5/Bibata_Cursor"
+url="https://github.com/ful1e5/Bibata_Cursor_Rainbow"
 license=('GPL-3.0-or-later')
-conflicts=("bibata-cursor-theme" "bibata-cursor-theme-bin")
+conflicts=("bibata-cursor-theme" "bibata-cursor-theme-bin" "bibata-rainbow-cursor-theme")
 options=('!strip')
-_variant=Bibata-Modern-Classic
+_variant=Bibata-Rainbow-Modern
 source=("${pkgname%-bin}-$pkgver.tar.xz::$url/releases/download/v$pkgver/$_variant.tar.xz")
 sha256sums=('SKIP')
 

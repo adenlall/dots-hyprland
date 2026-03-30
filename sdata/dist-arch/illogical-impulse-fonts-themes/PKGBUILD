@@ -7,11 +7,13 @@ license=(None)
 depends=(
   adw-gtk-theme-git
   breeze
-  breeze-plus
+  # breeze-plus
   darkly-bin
   eza
   fish
+  yazi
   fontconfig
+  xmlstarlet
   kitty
   matugen
   otf-space-grotesk
