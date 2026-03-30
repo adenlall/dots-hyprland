@@ -1,27 +1,32 @@
 # Polkit settup
+
 job=0
 while true; do
     printf "\n${STY_YELLOW}"
-    printf "🌟 Icon themes with foloder auto accent color theming"
+    printf "Icon themes with foloder auto accent color theming"
     printf "${STY_PURPLE}\nRequirements :\n"
     printf "${STY_RED}${STY_BOLD}"
-    printf "\t- xmlstarlet : extra/xmlstarlet\n"
+    printf "\t- xmlstarlet \t : extra/xmlstarlet\n"
+    printf "\t- fzf \t : extra/fzf\n"
     printf "${STY_YELLOW}${STY_RST}\n"
     read -p "Enable && Install requirements ? (Y/n) [default = Y] " -r ANSWER
     if [[ -z "$ANSWER" ]]; then
+        job=1
         break
     fi
     case "$ANSWER" in
         [Yy] ) job=1; break ;;
         [Nn] ) echo "Aborting!.";  break ;;
-        * )    job=1; echo "Please answer Y or n, or press Enter for yes."; break ;;
+        * )  echo "";;
     esac
 done
 
+echo "JSOB ; $job"
+
 if (( job==1 )); then
 
-    yay -S --needed fzf
-    themes=("None" "All" "Papirus" "WhiteSur")
+    yay -S --needed fzf xmlstarlet
+    themes=("WhiteSur" "Papirus" "None" "All")
 
     selected=$(printf "%s\n" "${themes[@]}" | fzf --prompt="Select Icon theme to be isntalled: ")
 

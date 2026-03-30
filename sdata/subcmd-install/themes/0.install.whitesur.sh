@@ -1,6 +1,6 @@
 
 ICON_PACK="WhiteSur"
-ICON_DIR="$HOME/icons/$ICON_PACK"
+ICON_DIR="$HOME/.local/share/icons/$ICON_PACK"
 GIT="https://github.com/vinceliuice/WhiteSur-icon-theme"
 INSTALL_DIR="/tmp/$ICON_PACK-install-end4"
 
@@ -15,13 +15,20 @@ printf "${STY_RED}${STY_BOLD}"
 printf "/tmp/$ICON_PACK-install\n"
 printf "${STY_RED}${STY_RST}"
 
+papirus(){
+    rm -rf "$INSTALL_DIR"
+    git clone --depth 1 --branch master "$GIT" "$INSTALL_DIR"
+    bash "$INSTALL_DIR/install.sh" -b
+}
 
-if [ -d "$INSTALL_DIR" ]; then
-    rm -rf $INSTALL_DIR
+if [[ -d "$ICON_DIR" && "$SKIP_UPDATE_ICONS" == true ]]; then
+    printf "\n%b--skip-updateicons => Skipping reinstalling icon pack since it already exists!%b\n" \
+        "${STY_RED}${STY_BOLD}" "${STY_CYAN}${STY_RST}"
+else
+    papirus
 fi
 
-git clone --depth 1 $GIT $INSTALL_DIR
-bash $INSTALL_DIR/install.sh -b
+rm -rf "$INSTALL_DIR"
 sed -i "s/^iconslight = .*/iconslight = $ICON_PACK/" "$XDG_CONFIG_HOME/kde-material-you-colors/config.conf"
 sed -i "s/^iconsdark = .*/iconsdark = $ICON_PACK/" "$XDG_CONFIG_HOME/kde-material-you-colors/config.conf"
 sed -i "/^\[Icons\]/,/^\[/ s/^Theme=.*/Theme=$ICON_PACK/" "$XDG_CONFIG_HOME/kdeglobals"
