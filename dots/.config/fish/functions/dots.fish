@@ -5,8 +5,8 @@ function dots --wraps='cd ~/.config' --description 'Manage the dots on ~/.dotsys
         case pull
             switch "$argv[2]"
                 case fast
-                    echo "pulling with --skip-backup --skip-allfiles --skip-alldeps --skip-allgreeting"
-                    ~/.dotsys/setup install --skip-backup --skip-allfiles --skip-alldeps --skip-allgreeting
+                    echo "pulling with --skip-backup --skip-updateicons --skip-alldeps --skip-allgreeting"
+                    ~/.dotsys/setup install --skip-backup --skip-updateicons --skip-alldeps --skip-allgreeting
                 case files
                     echo "pulling with --skip-backup --skip-alldeps"
                     ~/.dotsys/setup install --skip-backup --skip-alldeps
@@ -19,8 +19,8 @@ function dots --wraps='cd ~/.config' --description 'Manage the dots on ~/.dotsys
                     ~/.dotsys/setup install --skip-backup --skip-alldeps --skip-allgreeting
                     qs -c ii
                 case ''
-                    echo "pulling with --skip-backup --skip-alldeps --skip-allgreeting"
-                    ~/.dotsys/setup install --skip-backup --skip-alldeps --skip-allgreeting
+                    echo "pulling with --skip-backup --skip-alldeps --skip-updateicons --skip-allgreeting"
+                    ~/.dotsys/setup install --skip-backup  --skip-alldeps --skip-updateicons --skip-allgreeting
                 case '*'
                     echo "dots.fish pull [subcommand]: uknown $argv[2]"
                     return 1
