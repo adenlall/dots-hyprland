@@ -68,12 +68,64 @@ Rectangle {
                 Row {
                     id: genreRow
                     spacing: 5
+                    RippleButtonWithIcon {
+                        height: 32
+                        colBackground: Appearance.m3colors.m3onPrimary
+                        materialIcon: "favorite"
+                        mainText: watchingList[3]?.media?.favourites
+                    }
                     Repeater {
                         model: watchingList[3]?.media?.genres?.slice(0, 3);
                         delegate: AnimeBadge {
                                 required property string modelData
                                 text:modelData
                             }
+                    }
+                }
+
+                Row {
+                    spacing: 3
+                    MaterialSymbol {
+                        text: "date_range"
+                        height: 32 
+                        iconSize: Appearance.font.pixelSize.larger
+                        color: Appearance.m3colors.m3onPrimary
+                        fill: 1
+                    }
+                    StyledText {
+                        text: "Started :  "
+                        height: 32
+                        color: Appearance.m3colors.m3onPrimary
+                        font.pixelSize: Appearance.font.pixelSize.small
+                        font.weight: 700
+                    }
+                    RippleButtonWithIcon {
+                        height: 32
+                        colBackground: Appearance.m3colors.m3onSecondary
+                        mainText: watchingList[3]?.media?.favourites
+                    }
+                }
+
+                Row {
+                    spacing: 3
+                    MaterialSymbol {
+                        text: "kid_star"
+                        height: 32 
+                        iconSize: Appearance.font.pixelSize.larger
+                        color: Appearance.m3colors.m3onPrimary
+                        fill: 1
+                    }
+                    StyledText {
+                        text: "Avr. Rating :  "
+                        height: 32 
+                        color: Appearance.m3colors.m3onPrimary
+                        font.pixelSize: Appearance.font.pixelSize.small
+                        font.weight: 700
+                    }
+                    RippleButtonWithIcon {
+                        height: 32 
+                        colBackground: Appearance.m3colors.m3onSecondary
+                        mainText: watchingList[3]?.media?.averageScore + " % "
                     }
                 }
             }

@@ -60,7 +60,7 @@ Singleton {
 
     function getUserWatching() {
         return query(
-            "query($id: Int) { MediaListCollection(userId: $id, type: ANIME, sort: [UPDATED_TIME_DESC]) { lists { name entries { media { nextAiringEpisode { airingAt episode } title { userPreferred } coverImage { large } bannerImage genres } } } } }",
+            "query($id: Int) { MediaListCollection(userId: $id, type: ANIME, sort: [UPDATED_TIME_DESC]) { lists { name entries { media { nextAiringEpisode { airingAt episode } title { userPreferred } coverImage { large } startDate { month day year } favourites averageScore bannerImage genres } } } } }",
             {
                 id:userId
             }
