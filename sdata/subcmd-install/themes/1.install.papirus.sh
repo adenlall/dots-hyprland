@@ -1,5 +1,5 @@
 
-ICON_PACK="papirus"
+ICON_PACK="Papirus"
 ICON_DIR="$HOME/icons/$ICON_PACK"
 GIT="https://github.com/PapirusDevelopmentTeam/papirus-icon-theme"
 INSTALL_DIR="/tmp/$ICON_PACK-install-end4"
@@ -18,7 +18,7 @@ printf "${STY_RED}${STY_RST}"
 
 papirus(){
     rm -rf "$INSTALL_DIR"
-    git clone --depth 1 --branch main $GIT $INSTALL_DIR
+    git clone --depth 1 --branch master $GIT $INSTALL_DIR
     cp -r $INSTALL_DIR/Papirus/ ~/.local/share/icons/
 }
 
