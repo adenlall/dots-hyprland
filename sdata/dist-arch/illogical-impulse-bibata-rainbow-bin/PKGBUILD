@@ -1,6 +1,7 @@
+groups=(illogical-impulse)
 pkgname=illogical-impulse-bibata-rainbow-bin
 pkgver=1.1.2
-pkgrel=1
+pkgrel=2
 pkgdesc="Material Based Cursor Theme, installed for illogical-impulse dotfiles"
 arch=('any')
 url="https://github.com/ful1e5/Bibata_Cursor_Rainbow"
