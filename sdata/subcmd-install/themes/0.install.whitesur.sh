@@ -15,17 +15,32 @@ printf "${STY_RED}${STY_BOLD}"
 printf "/tmp/$ICON_PACK-install\n"
 printf "${STY_RED}${STY_RST}"
 
-papirus(){
+whitesur(){
     rm -rf "$INSTALL_DIR"
     git clone --depth 1 --branch master "$GIT" "$INSTALL_DIR"
     bash "$INSTALL_DIR/install.sh" -b
+    
+    terms=("" "-download" "-documents" "-bookmark" "-cloud" "-code" "-dropbox" "-games" "-github" "-html" "-images" "-music" "-projects" "-public" "-root" "-temp" "-templates" "-torrent" "-vbox" "-videos" "-wine")
+    for term in "${terms[@]}"; do
+        target_folder="$ICON_DIR/places/scalable/folder${term}.svg"
+        source_folder="$ICON_DIR/places/scalable/pink-folder${term}.svg"
+        cp "$source_folder" "$target_folder"
+    done
+
+    terms=("-home" "-desktop")
+    for term in "${terms[@]}"; do
+        target_folder="$ICON_DIR/places/scalable/user${term}.svg"
+        source_folder="$ICON_DIR/places/scalable/pink-user${term}.svg"
+        cp "$source_folder" "$target_folder"
+    done
+
 }
 
 if [[ -d "$ICON_DIR" && "$SKIP_UPDATE_ICONS" == true ]]; then
     printf "\n%b--skip-updateicons => Skipping reinstalling icon pack since it already exists!%b\n" \
         "${STY_RED}${STY_BOLD}" "${STY_CYAN}${STY_RST}"
 else
-    papirus
+    whitesur
 fi
 
 rm -rf "$INSTALL_DIR"

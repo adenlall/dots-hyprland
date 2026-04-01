@@ -16,7 +16,7 @@ printf "/tmp/$ICON_PACK-install\n"
 printf "${STY_RED}${STY_RST}"
 
 
-whitesur(){
+papirus(){
     rm -rf "$INSTALL_DIR"
     git clone --depth 1 --branch main $GIT $INSTALL_DIR
     cp -r $INSTALL_DIR/Papirus/ ~/.local/share/icons/
@@ -26,7 +26,7 @@ if [[ -d "$ICON_DIR" && "$SKIP_UPDATE_ICONS" == true ]]; then
     printf "\n%b--skip-updateicons => Skipping reinstalling icon pack since it already exists!%b\n" \
         "${STY_RED}${STY_BOLD}" "${STY_CYAN}${STY_RST}"
 else
-    whitesur
+    papirus
 fi
 
 rm -rf "$INSTALL_DIR"
