@@ -19,7 +19,7 @@ printf "${STY_RED}${STY_RST}"
 papirus(){
     rm -rf "$INSTALL_DIR"
     git clone --depth 1 --branch master $GIT $INSTALL_DIR
-    cp -r $INSTALL_DIR/Papirus/ ~/.local/share/icons/
+    cp -r $INSTALL_DIR/$ICON_PACK/ ~/.local/share/icons/
 }
 
 if [[ -d "$ICON_DIR" && "$SKIP_UPDATE_ICONS" == true ]]; then
