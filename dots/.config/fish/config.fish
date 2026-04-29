@@ -24,8 +24,9 @@ if status is-interactive
     alias claer "printf '\033[2J\033[3J\033[1;1H'"
     alias pamcan pacman
     alias q 'qs -c ii'
-    alias code 'com.vscodium.codium-insiders'
-    alias c 'com.vscodium.codium-insiders'
+    alias code 'com.vscodium.codium'
+    alias c 'com.vscodium.codium'
+    alias gimp 'org.gimp.GIMP'
     if test "$TERM" != "linux"
         alias ls 'eza --icons'
     end

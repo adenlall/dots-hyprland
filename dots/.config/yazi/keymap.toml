@@ -60,9 +60,9 @@ keymap = [
 
 	# Operation
 	{ on = "o",         run = "open",                        desc = "Open selected files" },
-	{ on = "O",         run = "open --interactive",          desc = "Open selected files interactively" },
+	{ on = "O",         run = "plugin open-with-cmd",        desc = "Open selected files with" },
 	{ on = "<Enter>",   run = "enter",                       desc = "Open selected files" },
-	{ on = "<S-Enter>", run = "open",          desc = "Open selected files interactively" },
+	{ on = "<S-Enter>", run = "open",						 desc = "Open selected files interactively" },
 	{ on = "y",         run = "yank",                        desc = "Yank selected files (copy)" },
 	{ on = "x",         run = "yank --cut",                  desc = "Yank selected files (cut)" },
 	{ on = "p",         run = "paste",                       desc = "Paste yanked files" },

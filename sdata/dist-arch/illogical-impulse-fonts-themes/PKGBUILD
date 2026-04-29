@@ -17,6 +17,7 @@ depends=(
   xmlstarlet
   xdg-desktop-portal-termfilechooser-hunkyburrito-git
   kitty
+  zenity
   matugen
   otf-space-grotesk
   starship
