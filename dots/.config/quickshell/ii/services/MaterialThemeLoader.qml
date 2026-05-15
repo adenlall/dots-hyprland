@@ -6,6 +6,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 import qs.services
+import Quickshell.Hyprland
 
 /**
  * Automatically reloads generated material colors.
@@ -71,5 +72,27 @@ Singleton {
             root.applyColors(fileContent)
         }
         onLoadFailed: root.resetFilePathNextTime();
+    }
+
+    function toggleLightDark() {
+        const currentlyDark = Appearance.m3colors.darkmode;
+        Quickshell.execDetached([Directories.wallpaperSwitchScriptPath, "--mode", currentlyDark ? "light" : "dark", "--noswitch"]);
+    }
+
+    GlobalShortcut {
+        name: "toggleLightDark"
+        description: "Toggles between dark theme and light theme"
+
+        onPressed: {
+            root.toggleLightDark();
+        }
+    }
+
+    IpcHandler {
+        target: "theme"
+
+        function toggleLightDark(): void {
+            root.toggleLightDark();
+        }
     }
 }
