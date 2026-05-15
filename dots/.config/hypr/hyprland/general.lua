@@ -255,7 +255,7 @@ hl.animation({
 hl.config({
     input = {
         kb_layout = "us, ara",
-        kb_options = "grp:alt_caps_toggle"
+        kb_options = "grp:alt_caps_toggle",
         numlock_by_default = true,
         repeat_delay = 250,
         repeat_rate = 35,
